@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lostandfound.mapper.ItemMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.lostandfound.entity.Item">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="description" property="description" />
+        <result column="lost_or_found" property="lostOrFound" />
+        <result column="lost_or_found_time" property="lostOrFoundTime" />
+        <result column="location" property="location" />
+        <result column="contact" property="contact" />
+        <result column="contact_phone" property="contactPhone" />
+        <result column="user_id" property="userId" />
+        <result column="create_time" property="createTime" />
+        <result column="delete_time" property="deleteTime" />
+        <result column="is_deleted" property="isDeleted" />
+        <result column="is_completed" property="isCompleted" />
+    </resultMap>
+
+</mapper>
