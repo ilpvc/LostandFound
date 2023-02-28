@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.generator.config.OutputFile;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
 import java.util.Collections;
-import java.util.function.Consumer;
 
 public class GenerateCode {
 
@@ -33,8 +32,8 @@ public class GenerateCode {
                             .service("service")
                             .controller("controller")
                             .serviceImpl("service.impl")
-                            .mapper("mapper")
-                            .xml("mapper")
+                            .mapper("com/example/lostandfound/mapper")
+                            .xml("com/example/lostandfound/mapper")
                             .pathInfo(Collections.singletonMap(OutputFile.mapperXml, System.getProperty("user.dir") + "/src/main/resources/mapper"));
                 })
                 .strategyConfig(builder -> {

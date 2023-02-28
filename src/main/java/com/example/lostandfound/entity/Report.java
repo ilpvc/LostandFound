@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -65,7 +67,7 @@ public class Report implements Serializable {
      * 举报时间
      */
     @TableField("report_time")
-    private LocalDateTime reportTime;
+    private Date reportTime;
 
     /**
      * 逻辑删除标识，0表示未删除，1表示已删除

@@ -5,6 +5,7 @@ import com.example.lostandfound.mapper.MessageMapper;
 import com.example.lostandfound.service.MessageService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2023-02-24 10:20:13
  */
 @Service
+@Transactional
 public class MessageServiceImpl extends ServiceImpl<MessageMapper, Message> implements MessageService {
 
 }

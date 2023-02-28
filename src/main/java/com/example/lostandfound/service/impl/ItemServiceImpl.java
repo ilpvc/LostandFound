@@ -5,6 +5,7 @@ import com.example.lostandfound.mapper.ItemMapper;
 import com.example.lostandfound.service.ItemService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2023-02-24 10:20:13
  */
 @Service
+@Transactional
 public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements ItemService {
 
 }
