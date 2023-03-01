@@ -1,13 +1,13 @@
 package com.example.lostandfound.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.lostandfound.entity.User;
+import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * <p>
@@ -19,20 +19,28 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-@RequestMapping("/lostandfound/user")
+@RequestMapping("/laf/user")
 @CrossOrigin
 public class UserController {
     @Autowired
     UserService userService;
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable int id){
-        return userService.getById(id);
+    public R getUserById(@PathVariable int id){
+        return R.ok().data("item",userService.getById(id));
     }
 
-    @GetMapping("/")
-    public List<User> getUsers(){
-        log.info("测试成功");
-        return userService.list();
+    @GetMapping("/allUser")
+    public R getUsers(){
+        return R.ok().data("items",userService.list());
     }
+
+    @GetMapping("pageUser/{pageNo}/{pageCount}")
+    public R pageUser(@PathVariable int pageNo, @PathVariable int pageCount) {
+        Page<User> page = new Page<>(pageNo, pageCount);
+        userService.page(page, null);
+        return R.ok().data("items", page);
+    }
+
+
 }
