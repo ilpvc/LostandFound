@@ -10,6 +10,8 @@
         <result column="is_deleted" property="isDeleted" />
         <result column="create_time" property="createTime" />
         <result column="delete_time" property="deleteTime" />
+        <result column="avatar" property="avatar"/>
+        <result column="signature" property="signature"/>
     </resultMap>
 
 </mapper>

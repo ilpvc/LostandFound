@@ -64,5 +64,16 @@ public class User implements Serializable {
     @TableField("delete_time")
     private Date deleteTime;
 
+    /**
+     * 用户头像
+     */
+    @TableField("avatar")
+    private String avatar;
+
+    /**
+     * 个性签名
+     */
+    @TableField("signature")
+    private String signature;
 
 }
