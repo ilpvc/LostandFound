@@ -36,3 +36,22 @@ spring:
     # 是否缓存preparedStatement，也就是PSCache  官方建议MySQL下建议关闭   个人建议如果想用SQL防火墙 建议打开
     pool-prepared-statements: true
     max-pool-prepared-statement-per-connection-size: 20
+
+jwt:
+  # JWT存储的请求头
+  tokenHeader: Authorization
+  # JWT 加解密使用的密钥
+  secret: lzdwtl
+  # JWT的超期限时间（1000*60*60*24*14）14天，即两周
+  expiration: 1209600000
+  # JWT 负载中拿到开头
+  tokenHead: Bearer
+
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    path: /test
+  packages-to-scan: com.example.lostandfound.controller,com.example.lostandfound.entity.VO
