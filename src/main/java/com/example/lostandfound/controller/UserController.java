@@ -59,7 +59,7 @@ public class UserController {
         }
     }
 
-    @PutMapping("/updateEmployee")
+    @PutMapping("/updateUser")
     public R updateUser(@RequestBody User user) {
         boolean b = userService.updateById(user);
         if (b) {
@@ -109,19 +109,19 @@ public class UserController {
             queryWrapper.eq("age", userQuery.getAge());
         }
         if (userQuery.getGender() != null) {
-            queryWrapper.eq("age", userQuery.getGender());
+            queryWrapper.eq("gender", userQuery.getGender());
         }
         if (userQuery.getEmail() != null) {
-            queryWrapper.eq("age", userQuery.getEmail());
+            queryWrapper.eq("email", userQuery.getEmail());
         }
         if (userQuery.getClazz() != null) {
-            queryWrapper.eq("age", userQuery.getClazz());
+            queryWrapper.eq("clazz", userQuery.getClazz());
         }
         if (userQuery.getNickname() != null) {
-            queryWrapper.eq("age", userQuery.getNickname());
+            queryWrapper.eq("nickname", userQuery.getNickname());
         }
         if (userQuery.getStatus() != null) {
-            queryWrapper.eq("age", userQuery.getStatus());
+            queryWrapper.eq("status", userQuery.getStatus());
         }
     }
 }
