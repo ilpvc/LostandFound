@@ -23,10 +23,13 @@ import lombok.Setter;
 public class Attribute implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @ApiModelProperty("ID")
+    @TableField("id")
+    private int id;
 
     @ApiModelProperty("键")
-    @TableField("key")
-    private String key;
+    @TableField("attr_key")
+    private String attrKey;
 
     @ApiModelProperty("数字值")
     @TableField("number_value")
