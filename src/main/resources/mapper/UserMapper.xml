@@ -6,6 +6,7 @@
     <resultMap id="BaseResultMap" type="com.example.lostandfound.entity.User">
         <id column="id" property="id" />
         <result column="nickname" property="nickname" />
+        <result column="password" property="password" />
         <result column="real_name" property="realName" />
         <result column="age" property="age" />
         <result column="clazz" property="clazz" />

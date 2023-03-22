@@ -5,7 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -40,11 +41,11 @@ public class Follow implements Serializable {
 
     @ApiModelProperty("创建时间")
     @TableField("created_time")
-    private LocalDate createdTime;
+    private Date createdTime;
 
     @ApiModelProperty("更新时间")
     @TableField("updated_time")
-    private LocalDate updatedTime;
+    private Date updatedTime;
 
 
 }

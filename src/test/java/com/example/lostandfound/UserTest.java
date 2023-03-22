@@ -17,8 +17,8 @@ public class UserTest {
     @Test
     public void getUser(){
         if (userService!=null) {
-            User byId = userService.getById(1L);
-            System.out.println(byId.getUsername());
+            User byId = userService.getById(9);
+            System.out.println(byId.toString());
         }else{
             System.out.println("null");
         }
