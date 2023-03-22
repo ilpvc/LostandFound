@@ -13,7 +13,7 @@ mybatis-plus:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://150.158.4.148:10078/LostandFound?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowMultiQueries=true
+    url: jdbc:mysql://192.168.137.111:3306/LAF?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowMultiQueries=true
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource

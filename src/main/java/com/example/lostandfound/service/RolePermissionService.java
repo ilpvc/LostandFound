@@ -5,11 +5,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
  * <p>
- * 角色权限关联表 服务类
+ * 角色权限表 服务类
  * </p>
  *
  * @author ilpvc
- * @since 2023-02-24 10:20:13
+ * @since 2023-03-22 09:28:33
  */
 public interface RolePermissionService extends IService<RolePermission> {
 

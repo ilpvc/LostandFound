@@ -7,9 +7,8 @@
         <id column="id" property="id" />
         <result column="role_id" property="roleId" />
         <result column="permission_id" property="permissionId" />
-        <result column="create_time" property="createTime" />
-        <result column="delete_time" property="deleteTime" />
-        <result column="is_deleted" property="isDeleted" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_time" property="updatedTime" />
     </resultMap>
 
 </mapper>

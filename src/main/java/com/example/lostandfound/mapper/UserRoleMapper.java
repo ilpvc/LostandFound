@@ -6,11 +6,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
- * 用户角色关联表 Mapper 接口
+ * 用户角色表 Mapper 接口
  * </p>
  *
  * @author ilpvc
- * @since 2023-02-24 10:20:13
+ * @since 2023-03-22 09:28:33
  */
 @Mapper
 public interface UserRoleMapper extends BaseMapper<UserRole> {

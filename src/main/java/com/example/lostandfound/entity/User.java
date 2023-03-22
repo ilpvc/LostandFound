@@ -6,74 +6,92 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
-
+import java.time.LocalDate;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * <p>
- * 用户表
+ * 
  * </p>
  *
  * @author ilpvc
- * @since 2023-02-24 10:20:13
+ * @since 2023-03-22 09:28:33
  */
 @Getter
 @Setter
 @TableName("user")
+@ApiModel(value = "User对象", description = "")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 用户ID
-     */
+    @ApiModelProperty("用户ID	")
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
-    /**
-     * 用户名
-     */
-    @TableField("username")
-    private String username;
+    @ApiModelProperty("昵称")
+    @TableField("nickname")
+    private String nickname;
 
-    /**
-     * 密码
-     */
-    @TableField("password")
-    private String password;
+    @ApiModelProperty("真实姓名")
+    @TableField("real_name")
+    private String realName;
 
-    /**
-     * 是否删除，0表示未删除，1表示已删除
-     */
+    @ApiModelProperty("年龄")
+    @TableField("age")
+    private Integer age;
+
+    @ApiModelProperty("所在班级")
+    @TableField("clazz")
+    private String clazz;
+
+    @ApiModelProperty("电话号码")
+    @TableField("phone_number")
+    private String phoneNumber;
+
+    @ApiModelProperty("性别 1、男 2、女")
+    @TableField("gender")
+    private Integer gender;
+
+    @ApiModelProperty("邮箱")
+    @TableField("email")
+    private String email;
+
+    @ApiModelProperty("其他联系方式")
+    @TableField("other_contacts")
+    private String otherContacts;
+
+    @ApiModelProperty("找回数量")
+    @TableField("find_num")
+    private Integer findNum;
+
+    @ApiModelProperty("丢失数量")
+    @TableField("lost_num")
+    private Integer lostNum;
+
+    @ApiModelProperty("0表示未删除，1表示删除")
     @TableField("is_deleted")
     @TableLogic
     private Boolean isDeleted;
 
-    /**
-     * 创建时间
-     */
-    @TableField("create_time")
-    private Date createTime;
+    @ApiModelProperty("状态 1、正常 2、封禁")
+    @TableField("status")
+    private Integer status;
 
-    /**
-     * 删除时间
-     */
-    @TableField("delete_time")
-    private Date deleteTime;
+    @ApiModelProperty("用户积分")
+    @TableField("integral")
+    private Integer integral;
 
-    /**
-     * 用户头像
-     */
-    @TableField("avatar")
-    private String avatar;
+    @ApiModelProperty("创建时间")
+    @TableField("created_time")
+    private LocalDate createdTime;
 
-    /**
-     * 个性签名
-     */
-    @TableField("signature")
-    private String signature;
+    @ApiModelProperty("更新时间")
+    @TableField("updated_time")
+    private LocalDate updatedTime;
+
 
 }

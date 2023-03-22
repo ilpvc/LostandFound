@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.lostandfound.mapper.CommentsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.lostandfound.entity.Comments">
+        <id column="id" property="id" />
+        <result column="post_id" property="postId" />
+        <result column="commenter_id" property="commenterId" />
+        <result column="commented_user_id" property="commentedUserId" />
+        <result column="content" property="content" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_time" property="updatedTime" />
+        <result column="deleted_time" property="deletedTime" />
+        <result column="comment_type" property="commentType" />
+        <result column="parent_id" property="parentId" />
+    </resultMap>
+
+</mapper>

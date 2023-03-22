@@ -6,11 +6,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>
- * 角色权限关联表 Mapper 接口
+ * 角色权限表 Mapper 接口
  * </p>
  *
  * @author ilpvc
- * @since 2023-02-24 10:20:13
+ * @since 2023-03-22 09:28:33
  */
 @Mapper
 public interface RolePermissionMapper extends BaseMapper<RolePermission> {

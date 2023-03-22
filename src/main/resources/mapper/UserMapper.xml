@@ -5,13 +5,21 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.example.lostandfound.entity.User">
         <id column="id" property="id" />
-        <result column="username" property="username" />
-        <result column="password" property="password" />
+        <result column="nickname" property="nickname" />
+        <result column="real_name" property="realName" />
+        <result column="age" property="age" />
+        <result column="clazz" property="clazz" />
+        <result column="phone_number" property="phoneNumber" />
+        <result column="gender" property="gender" />
+        <result column="email" property="email" />
+        <result column="other_contacts" property="otherContacts" />
+        <result column="find_num" property="findNum" />
+        <result column="lost_num" property="lostNum" />
         <result column="is_deleted" property="isDeleted" />
-        <result column="create_time" property="createTime" />
-        <result column="delete_time" property="deleteTime" />
-        <result column="avatar" property="avatar"/>
-        <result column="signature" property="signature"/>
+        <result column="status" property="status" />
+        <result column="integral" property="integral" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_time" property="updatedTime" />
     </resultMap>
 
 </mapper>

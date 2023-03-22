@@ -12,18 +12,20 @@ import java.util.Collections;
 public class GenerateCode {
 
     private static final DataSourceConfig DATA_SOURCE_CONFIG = new DataSourceConfig
-            .Builder("jdbc:mysql://150.158.4.148:10078/LostandFound?serverTimezone=Asia/Shanghai", "root", "123456")
+            .Builder("jdbc:mysql://192.168.137.111:3306/LAF?serverTimezone=Asia/Shanghai", "root", "123456")
             .build();
 
     public static void main(String[] args) {
 
 
-        FastAutoGenerator.create("jdbc:mysql://150.158.4.148:10078/LostandFound?serverTimezone=Asia/Shanghai","root","123456")
+        FastAutoGenerator.create("jdbc:mysql://192.168.137.111:3306/LAF?serverTimezone=Asia/Shanghai","root","123456")
                 .globalConfig(builder -> {
                     builder.author("ilpvc")
                             .commentDate("yyyy-MM-dd hh:mm:ss")
                             .outputDir(System.getProperty("user.dir") + "/src/main/java")
-                            .disableOpenDir();
+                            .disableOpenDir()
+                            .fileOverride()
+                            .enableSwagger();
                 })
                 .packageConfig(builder -> {
                     builder.parent("com.example")
@@ -32,8 +34,8 @@ public class GenerateCode {
                             .service("service")
                             .controller("controller")
                             .serviceImpl("service.impl")
-                            .mapper("com/example/lostandfound/mapper")
-                            .xml("com/example/lostandfound/mapper")
+                            .mapper("mapper")
+                            .xml("mapper.xml")
                             .pathInfo(Collections.singletonMap(OutputFile.mapperXml, System.getProperty("user.dir") + "/src/main/resources/mapper"));
                 })
                 .strategyConfig(builder -> {

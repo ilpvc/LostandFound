@@ -3,66 +3,49 @@ package com.example.lostandfound.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
-
+import java.time.LocalDate;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
  * <p>
- * 角色权限关联表
+ * 角色权限表
  * </p>
  *
  * @author ilpvc
- * @since 2023-02-24 10:20:13
+ * @since 2023-03-22 09:28:33
  */
 @Getter
 @Setter
 @TableName("role_permission")
+@ApiModel(value = "RolePermission对象", description = "角色权限表")
 public class RolePermission implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * ID
-     */
+    @ApiModelProperty("主键ID")
     @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private Integer id;
 
-    /**
-     * 角色ID
-     */
+    @ApiModelProperty("角色ID")
     @TableField("role_id")
-    private Long roleId;
+    private Integer roleId;
 
-    /**
-     * 权限ID
-     */
+    @ApiModelProperty("权限ID")
     @TableField("permission_id")
-    private Long permissionId;
+    private Integer permissionId;
 
-    /**
-     * 创建时间
-     */
-    @TableField("create_time")
-    private Date createTime;
+    @ApiModelProperty("创建时间")
+    @TableField("created_time")
+    private LocalDate createdTime;
 
-    /**
-     * 删除时间
-     */
-    @TableField("delete_time")
-    private Date deleteTime;
-
-    /**
-     * 是否删除，0表示未删除，1表示已删除
-     */
-    @TableField("is_deleted")
-    @TableLogic
-    private Boolean isDeleted;
+    @ApiModelProperty("更新时间")
+    @TableField("updated_time")
+    private LocalDate updatedTime;
 
 
 }
