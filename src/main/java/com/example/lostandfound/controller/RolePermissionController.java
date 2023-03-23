@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/lostandfound/role-permission")
+@CrossOrigin
 public class RolePermissionController {
 
     @Autowired

@@ -36,7 +36,7 @@ public class GenerateCode {
                             .serviceImpl("service.impl")
                             .mapper("mapper")
                             .xml("mapper.xml")
-                            .pathInfo(Collections.singletonMap(OutputFile.mapperXml, System.getProperty("user.dir") + "/src/main/resources/mapper"));
+                            .pathInfo(Collections.singletonMap(OutputFile.xml, System.getProperty("user.dir") + "/src/main/resources/mapper"));
                 })
                 .strategyConfig(builder -> {
                     builder.serviceBuilder()

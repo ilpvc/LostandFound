@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/lostandfound/comments")
+@CrossOrigin
 public class CommentsController {
     private QueryWrapper<Comments> queryWrapper;
     @Autowired

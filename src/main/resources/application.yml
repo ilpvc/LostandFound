@@ -13,7 +13,7 @@ mybatis-plus:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.137.111:3306/LAF?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowMultiQueries=true
+    url: jdbc:mysql://192.168.137.111:3306/LAF?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowMultiQueries=true&allowPublicKeyRetrieval=true
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -36,6 +36,19 @@ spring:
     # 是否缓存preparedStatement，也就是PSCache  官方建议MySQL下建议关闭   个人建议如果想用SQL防火墙 建议打开
     pool-prepared-statements: true
     max-pool-prepared-statement-per-connection-size: 20
+  # redis配置
+  data:
+    redis:
+      #数据库索引
+      database: 0
+      #服务器地址
+      host: 192.168.137.111
+      #端口号
+      port: 6379
+      #redis密码（默认为空）
+      password: 123456
+      #连接redis超时时间
+      timeout: 3000
 
 jwt:
   # JWT存储的请求头
@@ -55,3 +68,4 @@ springdoc:
   swagger-ui:
     path: /test
   packages-to-scan: com.example.lostandfound.controller,com.example.lostandfound.entity.VO
+

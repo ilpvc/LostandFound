@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/lostandfound/likes")
+@CrossOrigin
 public class LikesController {
 
     @Autowired

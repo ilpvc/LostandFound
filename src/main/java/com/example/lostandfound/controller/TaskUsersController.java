@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/lostandfound/task-users")
+@CrossOrigin
 public class TaskUsersController {
 
 

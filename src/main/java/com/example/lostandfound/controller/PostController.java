@@ -22,6 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/lostandfound/post")
+@CrossOrigin
 public class PostController {
 
 

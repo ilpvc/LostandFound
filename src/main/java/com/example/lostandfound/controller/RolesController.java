@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/lostandfound/roles")
+@CrossOrigin
 public class RolesController {
 
 

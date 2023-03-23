@@ -7,7 +7,13 @@ import com.example.lostandfound.entity.User;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.entity.VO.UserQuery;
 import com.example.lostandfound.service.UserService;
+import com.example.lostandfound.utils.RedisCache;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,17 +28,26 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/lostandfound/user")
+@CrossOrigin
+@Slf4j
 public class UserController {
 
     private QueryWrapper<User> queryWrapper;
     @Autowired
     UserService userService;
-
-
+    @Autowired
+    RedisCache redisCache;
+    Logger logger = LoggerFactory.getLogger("UserController");
     @GetMapping("/")
     public R getAllUser() {
 
-        return R.ok().data("list", userService.list());
+        List<User> users = userService.list();
+        for (int i =0 ;i<users.size();i++){
+            redisCache.setCacheObject("user"+i,users.get(i));
+        }
+//        redisCache.setCacheObject("user",users.get(1));
+        return R.ok().data("list", users);
+
     }
 
     @GetMapping("/{id}")
