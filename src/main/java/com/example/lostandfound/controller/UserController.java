@@ -45,7 +45,6 @@ public class UserController {
         for (int i =0 ;i<users.size();i++){
             redisCache.setCacheObject("user"+i,users.get(i));
         }
-//        redisCache.setCacheObject("user",users.get(1));
         return R.ok().data("list", users);
 
     }

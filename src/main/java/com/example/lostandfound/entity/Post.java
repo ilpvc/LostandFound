@@ -42,10 +42,17 @@ public class Post implements Serializable {
     @TableField("title")
     private String title;
 
+
+    @ApiModelProperty("图片url")
+    @TableField("image")
+    private String image;
     @ApiModelProperty("内容")
     @TableField("content")
     private String content;
 
+    @ApiModelProperty("热度")
+    @TableField("count")
+    private Integer count;
     @ApiModelProperty("作者ID")
     @TableField("user_id")
     private Integer userId;

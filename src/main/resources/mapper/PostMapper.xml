@@ -7,7 +7,9 @@
         <id column="id" property="id" />
         <result column="type" property="type" />
         <result column="title" property="title" />
+        <result column="image" property="image" />
         <result column="content" property="content" />
+        <result column="count" property="count" />
         <result column="user_id" property="userId" />
         <result column="created_time" property="createdTime" />
         <result column="updated_time" property="updatedTime" />
