@@ -87,6 +87,10 @@ public class RedisCache
         return operation.get(key);
     }
 
+    public <T> T getObject(final String key){
+        return (T) redisTemplate.opsForValue().get(key);
+    }
+
     /**
      * 删除单个对象
      *

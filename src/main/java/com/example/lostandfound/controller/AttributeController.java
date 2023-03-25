@@ -32,12 +32,40 @@ public class AttributeController {
         return R.ok().data("list",attributeService.list());
     }
 
-    @PostMapping("/condition")
-    public R UserCondition(@RequestBody AttributeQuery attributeQuery) {
+    @GetMapping("/only/{key}")
+    public R getQuestionByOnlyKey(@PathVariable String key) {
+
         queryWrapper = new QueryWrapper<>();
-        setQueryWrapper(attributeQuery);
+
+        if (!"".equals(key)){
+            queryWrapper.eq("attr_key",key);
+        }
+        Attribute attributes = attributeService.getOne(queryWrapper);
+        return R.ok().data("item", attributes);
+    }
+
+    @GetMapping("/{key}")
+    public R getQuestionByKey(@PathVariable String key) {
+
+        queryWrapper = new QueryWrapper<>();
+
+        if (!"".equals(key)){
+            queryWrapper.eq("attr_key",key);
+        }
         List<Attribute> attributes = attributeService.list(queryWrapper);
-        return R.ok().data("list", attributes).data("num", attributes.size());
+        return R.ok().data("list", attributes);
+    }
+
+    @GetMapping("/like/{key}")
+    public R getQuestionLikeKey(@PathVariable String key) {
+
+        queryWrapper = new QueryWrapper<>();
+
+        if (!"".equals(key)){
+            queryWrapper.like("attr_key",key);
+        }
+        List<Attribute> attributes = attributeService.list(queryWrapper);
+        return R.ok().data("list", attributes);
     }
 
 

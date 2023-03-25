@@ -34,6 +34,10 @@ public class User implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
+    @ApiModelProperty("头像")
+    @TableField("header")
+    private String header;
+
     @ApiModelProperty("昵称")
     @TableField("nickname")
     private String nickname;

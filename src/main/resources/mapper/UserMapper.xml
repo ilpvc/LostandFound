@@ -5,6 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.example.lostandfound.entity.User">
         <id column="id" property="id" />
+        <result column="header" property="header" />
         <result column="nickname" property="nickname" />
         <result column="password" property="password" />
         <result column="real_name" property="realName" />
