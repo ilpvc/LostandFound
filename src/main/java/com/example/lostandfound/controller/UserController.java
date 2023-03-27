@@ -39,7 +39,7 @@ public class UserController {
     RedisCache redisCache;
     Logger logger = LoggerFactory.getLogger("UserController");
     @GetMapping("/")
-    public R getAllUser() {
+    public R getAllUserAndCache() {
 
         List<User> users = userService.list();
         for (int i =0 ;i<users.size();i++){
@@ -47,6 +47,14 @@ public class UserController {
         }
         return R.ok().data("list", users);
 
+    }
+    @GetMapping("/ranking")
+    public R getRankingUser(){
+        queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("find_num");
+        queryWrapper.last("limit 10");
+        List<User> users = userService.list(queryWrapper);
+        return R.ok().data("list",users);
     }
 
     @GetMapping("/{id}")
