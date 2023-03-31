@@ -23,14 +23,18 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class LoginController {
 
+
+    @Autowired
+    UserController userController;
+
     @Autowired
     private AuthenticationManager authenticationManager;
     @PostMapping("/")
     public R login(@RequestBody LoginParams loginParams){
-        log.info(loginParams.getEmail());
         UsernamePasswordAuthenticationToken token =
                 new UsernamePasswordAuthenticationToken(loginParams.getEmail(), loginParams.getPassword());
         Authentication authenticate = authenticationManager.authenticate(token);
-        return R.ok().data("token","token");
+        userController.getAllUserAndCache();
+        return R.ok().data("token",authenticate);
     }
 }

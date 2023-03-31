@@ -7,7 +7,6 @@
         <id column="id" property="id" />
         <result column="header" property="header" />
         <result column="nickname" property="nickname" />
-        <result column="password" property="password" />
         <result column="real_name" property="realName" />
         <result column="age" property="age" />
         <result column="clazz" property="clazz" />

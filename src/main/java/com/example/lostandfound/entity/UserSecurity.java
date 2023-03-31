@@ -33,13 +33,9 @@ public class UserSecurity implements Serializable {
     @TableField("user_id")
     private Integer userId;
 
-    @ApiModelProperty("密码盐")
-    @TableField("salt")
-    private String salt;
-
-    @ApiModelProperty("加盐位置")
-    @TableField("salt_index")
-    private Integer saltIndex;
+    @ApiModelProperty("昵称")
+    @TableField("nickname")
+    private String nickname;
 
     @ApiModelProperty("密码")
     @TableField("password")

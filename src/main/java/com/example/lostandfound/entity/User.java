@@ -42,10 +42,6 @@ public class User implements Serializable {
     @TableField("nickname")
     private String nickname;
 
-    @ApiModelProperty("密码")
-    @TableField("password")
-    private  String password;
-
     @ApiModelProperty("真实姓名")
     @TableField("real_name")
     private String realName;

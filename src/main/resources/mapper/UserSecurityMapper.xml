@@ -6,8 +6,7 @@
     <resultMap id="BaseResultMap" type="com.example.lostandfound.entity.UserSecurity">
         <id column="id" property="id" />
         <result column="user_id" property="userId" />
-        <result column="salt" property="salt" />
-        <result column="salt_index" property="saltIndex" />
+        <result column="nickname" property="nickname"/>
         <result column="password" property="password" />
         <result column="email" property="email" />
     </resultMap>

@@ -23,7 +23,6 @@ public class MapUserRepository implements UserRepository{
     }
     @Override
     public User findUserByEmail(String email) {
-        log.info(emailToUser.toString());
         return this.emailToUser.get(email);
     }
 }

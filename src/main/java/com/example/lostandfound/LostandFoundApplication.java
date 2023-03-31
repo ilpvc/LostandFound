@@ -17,19 +17,19 @@ public class LostandFoundApplication {
 		SpringApplication.run(LostandFoundApplication.class, args);
 	}
 
-	@Bean
-	public MapUserRepository userRepository() {
-//		String encodedPassword = pass().encode("password");
-
-		// the raw password is "password"
-        String encodedPassword = "{bcrypt}$2a$10$h/AJueu7Xt9yh3qYuAXtk.WZJ544Uc2kdOKlHu2qQzCh/A3rq46qm";
-
-		User user = new User();
-		user.setNickname("ilpvc");
-		user.setEmail("ilpvc@qq.com");
-		user.setPassword(encodedPassword);
-		Map<String, User> emailToCustomUser = new HashMap<>();
-		emailToCustomUser.put(user.getEmail(), user);
-		return new MapUserRepository(emailToCustomUser);
-	}
+//	@Bean
+//	public MapUserRepository userRepository() {
+////		String encodedPassword = pass().encode("password");
+//
+//		// the raw password is "password"
+//        String encodedPassword = "{bcrypt}$2a$10$h/AJueu7Xt9yh3qYuAXtk.WZJ544Uc2kdOKlHu2qQzCh/A3rq46qm";
+//
+//		User user = new User();
+//		user.setNickname("ilpvc");
+//		user.setEmail("ilpvc@qq.com");
+//		user.setPassword(encodedPassword);
+//		Map<String, User> emailToCustomUser = new HashMap<>();
+//		emailToCustomUser.put(user.getEmail(), user);
+//		return new MapUserRepository(emailToCustomUser);
+//	}
 }
