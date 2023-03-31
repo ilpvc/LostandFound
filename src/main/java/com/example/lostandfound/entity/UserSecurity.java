@@ -4,27 +4,25 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
- * <p>
- * 用户角色表
- * </p>
+ * Description:
  *
- * @author ilpvc
- * @since 2023-03-22 09:28:33
+ * @date:2023/3/29 10:21
+ * @author: ilpvc
  */
+
 @Getter
 @Setter
-@TableName("user_role")
-@ApiModel(value = "UserRole对象", description = "用户角色表")
-public class UserRole implements Serializable {
+@TableName("user_security")
+@ApiModel(value = "UserSecurity对象", description = "用户密码表")
+public class UserSecurity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -35,17 +33,19 @@ public class UserRole implements Serializable {
     @TableField("user_id")
     private Integer userId;
 
-    @ApiModelProperty("角色ID")
-    @TableField("role_id")
-    private Integer roleId;
+    @ApiModelProperty("密码盐")
+    @TableField("salt")
+    private String salt;
 
-    @ApiModelProperty("创建时间")
-    @TableField("created_time")
-    private Date createdTime;
+    @ApiModelProperty("加盐位置")
+    @TableField("salt_index")
+    private Integer saltIndex;
 
-    @ApiModelProperty("更新时间")
-    @TableField("updated_time")
-    private Date updatedTime;
+    @ApiModelProperty("密码")
+    @TableField("password")
+    private String password;
 
-
+    @ApiModelProperty("用户邮箱")
+    @TableField("email")
+    private String email;
 }

@@ -27,6 +27,9 @@ public class UserQuery {
     @ApiModelProperty("所在班级")
     private String clazz;
 
+    @ApiModelProperty("密码")
+    private String password;
+
     @ApiModelProperty("电话号码")
     private String phoneNumber;
 
@@ -35,6 +38,9 @@ public class UserQuery {
 
     @ApiModelProperty("邮箱")
     private String email;
+
+    @ApiModelProperty("邮箱验证码")
+    private String emailCode;
 
     @ApiModelProperty("找回数量")
     private Integer findNum;

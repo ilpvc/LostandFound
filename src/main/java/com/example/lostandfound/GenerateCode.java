@@ -22,9 +22,8 @@ public class GenerateCode {
                 .globalConfig(builder -> {
                     builder.author("ilpvc")
                             .commentDate("yyyy-MM-dd hh:mm:ss")
-                            .outputDir(System.getProperty("user.dir") + "/src/main/java")
+                            .outputDir(System.getProperty("user.dir") + "/src/main/java/test")
                             .disableOpenDir()
-                            .fileOverride()
                             .enableSwagger();
                 })
                 .packageConfig(builder -> {

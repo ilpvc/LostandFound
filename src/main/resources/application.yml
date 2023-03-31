@@ -50,6 +50,12 @@ spring:
       #连接redis超时时间
       timeout: 3000
 
+  # springSecurity配置
+#  security:
+#    user:
+#      name: user
+#      password: 123456
+
 jwt:
   # JWT存储的请求头
   tokenHeader: Authorization
