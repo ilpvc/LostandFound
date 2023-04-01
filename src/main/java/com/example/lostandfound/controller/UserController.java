@@ -38,6 +38,11 @@ public class UserController {
     @Autowired
     RedisCache redisCache;
     Logger logger = LoggerFactory.getLogger("UserController");
+
+    /**
+     * 获取所有角色信息并且做缓存
+     * @return
+     */
     @GetMapping("/")
     public R getAllUserAndCache() {
 
@@ -48,6 +53,11 @@ public class UserController {
         return R.ok().data("list", users);
 
     }
+
+    /**
+     * 按照排名获取角色
+     * @return
+     */
     @GetMapping("/ranking")
     public R getRankingUser(){
         queryWrapper = new QueryWrapper<>();
@@ -57,18 +67,33 @@ public class UserController {
         return R.ok().data("list",users);
     }
 
+    /**
+     * 根据id获取角色
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public R getUserById(@PathVariable int id) {
         return R.ok().data("item", userService.getById(id));
     }
 
+    /**
+     * 根据id从缓存中获取角色
+     * @param id
+     * @return
+     */
     @GetMapping("/cache/{id}")
     public R getCacheUserById(@PathVariable int id) {
         User user = redisCache.getObject(String.valueOf(id));
         return R.ok().data("item", user);
     }
 
-
+    /**
+     * 分页查询用户
+     * @param pageNo 当前页码
+     * @param pageCount 每页数量
+     * @return
+     */
     @GetMapping("pageUser/{pageNo}/{pageCount}")
     public R pageConfig(@PathVariable int pageNo, @PathVariable int pageCount) {
         Page<User> page = new Page<>(pageNo, pageCount);
@@ -77,6 +102,11 @@ public class UserController {
     }
 
 
+    /**
+     * 新增用户
+     * @param user
+     * @return
+     */
     @PostMapping("/addUser")
     public R addUser(@RequestBody User user) {
         boolean save = userService.save(user);
@@ -87,6 +117,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
     @PutMapping("/updateUser")
     public R updateUser(@RequestBody User user) {
         boolean b = userService.updateById(user);
@@ -97,6 +132,11 @@ public class UserController {
         }
     }
 
+    /**
+     * 根据id删除用户
+     * @param id
+     * @return
+     */
     @DeleteMapping("/{id}")
     public R deleteUser(@PathVariable int id) {
 
@@ -109,6 +149,13 @@ public class UserController {
     }
 
 
+    /**
+     * 分页条件查询
+     * @param pageNo 当前页码
+     * @param pageCount 每页数量
+     * @param userQuery 查询条件
+     * @return
+     */
     @PostMapping("/pageUserCondition/{pageNo}/{pageCount}")
     public R pageUserCondition(@PathVariable int pageNo,
                                @PathVariable int pageCount,
@@ -122,6 +169,11 @@ public class UserController {
         return R.ok().data("items", page);
     }
 
+    /**
+     * 条件查询
+     * @param userQuery 条件
+     * @return
+     */
     @PostMapping("/condition")
     public R UserCondition(@RequestBody UserQuery userQuery) {
         queryWrapper = new QueryWrapper<>();

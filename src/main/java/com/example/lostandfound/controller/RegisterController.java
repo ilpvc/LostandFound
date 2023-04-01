@@ -54,9 +54,12 @@ public class RegisterController {
 
             user.setEmail(loginParams.getEmail());
             userSecurity.setEmail(loginParams.getEmail());
-            userSecurity.setPassword(passwordEncoder.encode(loginParams.getPassword()));
-
+            userSecurity.setPassword("{bcrypt}"+passwordEncoder.encode(loginParams.getPassword()));
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("nickname",user.getNickname());
             userService.save(user);
+            User one = userService.getOne(queryWrapper);
+            userSecurity.setUserId(one.getId());
             userSecurityService.save(userSecurity);
             return R.ok().message("注册成功");
         }else if (userSecurities.size()!=0){
