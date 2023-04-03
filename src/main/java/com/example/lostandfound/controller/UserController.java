@@ -48,7 +48,7 @@ public class UserController {
 
         List<User> users = userService.list();
         for (int i =0 ;i<users.size();i++){
-            redisCache.setCacheObject(users.get(i).getId().toString(),users.get(i));
+            redisCache.setCacheObject("user-"+users.get(i).getId().toString(),users.get(i));
         }
         return R.ok().data("list", users);
 
@@ -84,7 +84,8 @@ public class UserController {
      */
     @GetMapping("/cache/{id}")
     public R getCacheUserById(@PathVariable int id) {
-        User user = redisCache.getObject(String.valueOf(id));
+        String userId = "user-"+id;
+        User user = redisCache.getObject(userId);
         return R.ok().data("item", user);
     }
 

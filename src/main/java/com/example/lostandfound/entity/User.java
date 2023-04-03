@@ -1,10 +1,7 @@
 package com.example.lostandfound.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
@@ -35,7 +32,7 @@ public class User implements Serializable {
     private Integer id;
 
     @ApiModelProperty("头像")
-    @TableField("header")
+    @TableField(value = "header",fill = FieldFill.INSERT)
     private String header;
 
     @ApiModelProperty("昵称")

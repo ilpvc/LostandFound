@@ -31,9 +31,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserSecurityMapper userSecurityMapper;
 
     private QueryWrapper<UserSecurity> queryWrapper;
-//    public UserDetailsServiceImpl(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
