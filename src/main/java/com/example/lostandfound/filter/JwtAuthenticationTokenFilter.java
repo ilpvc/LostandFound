@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -57,8 +56,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             if (matcher.find()) {
                 email = matcher.group(1);
                 String jwt = redisCache.getCacheObject("token-user-" + email);
-                log.info("token:"+token);
-                log.info("jwt:"+jwt);
                 if (token.isEmpty() || !token.equals(jwt)) {
                     log.info("认证失败====");
                     response.addIntHeader("status", 403);
