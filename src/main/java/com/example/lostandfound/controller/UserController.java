@@ -127,10 +127,16 @@ public class UserController {
     public R updateUser(@RequestBody User user) {
         boolean b = userService.updateById(user);
         if (b) {
+            updateCacheUserById(user);
             return R.ok();
         } else {
             return R.error();
         }
+    }
+
+    public void updateCacheUserById(User user){
+        User byId = userService.getById(user.getId());
+        redisCache.setCacheObject("user-"+user.getId().toString(),byId);
     }
 
     /**

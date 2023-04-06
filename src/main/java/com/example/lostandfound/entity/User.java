@@ -59,6 +59,9 @@ public class User implements Serializable {
     @TableField("gender")
     private Integer gender;
 
+    @ApiModelProperty("QQ")
+    @TableField("QQ")
+    private String QQ;
     @ApiModelProperty("邮箱")
     @TableField("email")
     private String email;

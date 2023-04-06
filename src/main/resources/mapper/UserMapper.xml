@@ -10,6 +10,7 @@
         <result column="real_name" property="realName" />
         <result column="age" property="age" />
         <result column="clazz" property="clazz" />
+        <result column="QQ" property="QQ"/>
         <result column="phone_number" property="phoneNumber" />
         <result column="gender" property="gender" />
         <result column="email" property="email" />
