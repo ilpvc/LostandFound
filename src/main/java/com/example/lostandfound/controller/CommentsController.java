@@ -4,10 +4,13 @@ package com.example.lostandfound.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.lostandfound.entity.Comments;
+import com.example.lostandfound.entity.VO.CommentsQuery;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.service.CommentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -78,6 +81,8 @@ public class CommentsController {
         }
     }
 
+
+
 //
 //    @PostMapping("/pageCommentsCondition/{pageNo}/{pageCount}")
 //    public R pageCommentsCondition(@PathVariable int pageNo,
@@ -91,36 +96,36 @@ public class CommentsController {
 //        commentsService.page(page, queryWrapper);
 //        return R.ok().data("items", page);
 //    }
+
+    @PostMapping("/condition")
+    public R CommentsCondition(@RequestBody CommentsQuery commentsQuery) {
+        queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(commentsQuery);
+        List<Comments> comments = commentsService.list(queryWrapper);
+        return R.ok().data("list", comments).data("num", comments.size());
+    }
 //
-//    @PostMapping("/condition")
-//    public R CommentsCondition(@RequestBody CommentsQuery commentsQuery) {
-//        queryWrapper = new QueryWrapper<>();
-//        setQueryWrapper(commentsQuery);
-//        List<Comments> comments = commentsService.list(queryWrapper);
-//        return R.ok().data("list", comments).data("num", comments.size());
-//    }
 //
 //
-//
-//    private void setQueryWrapper(CommentsQuery commentsQuery){
-//        if (commentsQuery.getAge() != null) {
-//            queryWrapper.eq("age", commentsQuery.getAge());
-//        }
-//        if (commentsQuery.getGender() != null) {
-//            queryWrapper.eq("gender", commentsQuery.getGender());
-//        }
-//        if (commentsQuery.getEmail() != null) {
-//            queryWrapper.eq("email", commentsQuery.getEmail());
-//        }
-//        if (commentsQuery.getClazz() != null) {
-//            queryWrapper.eq("clazz", commentsQuery.getClazz());
-//        }
-//        if (commentsQuery.getNickname() != null) {
-//            queryWrapper.eq("nickname", commentsQuery.getNickname());
-//        }
-//        if (commentsQuery.getStatus() != null) {
-//            queryWrapper.eq("status", commentsQuery.getStatus());
-//        }
-//    }
+    private void setQueryWrapper(CommentsQuery commentsQuery){
+        if (commentsQuery.getCommenterId() != null) {
+            queryWrapper.eq("commenter_id", commentsQuery.getCommenterId());
+        }
+        if (commentsQuery.getCommentType() != null) {
+            queryWrapper.eq("comment_type", commentsQuery.getCommentType());
+        }
+        if (commentsQuery.getCommentedUserId() != null) {
+            queryWrapper.eq("commented_user_id", commentsQuery.getCommentedUserId());
+        }
+        if (commentsQuery.getPostId() != null) {
+            queryWrapper.eq("post_id", commentsQuery.getPostId());
+        }
+        if (commentsQuery.getContent() != null) {
+            queryWrapper.like("content", commentsQuery.getContent());
+        }
+        if (commentsQuery.getParentId() != null) {
+            queryWrapper.eq("parent_id", commentsQuery.getParentId());
+        }
+    }
 
 }

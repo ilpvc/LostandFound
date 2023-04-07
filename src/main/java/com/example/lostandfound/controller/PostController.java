@@ -100,7 +100,6 @@ public class PostController {
 
     @PostMapping("/condition")
     public R PostCondition(@RequestBody PostQuery postQuery) {
-        log.info(postQuery.getCollection().toString());
         queryWrapper = new QueryWrapper<>();
         setQueryWrapper(postQuery);
         List<Post> posts = postService.list(queryWrapper);
@@ -112,23 +111,34 @@ public class PostController {
 
 
     private void setQueryWrapper(PostQuery postQuery){
+        boolean flag = false;
         if (postQuery.getType() != null) {
             queryWrapper.eq("type", postQuery.getType());
+            flag=true;
         }
         if (postQuery.getTitle() != null) {
             queryWrapper.eq("title", postQuery.getTitle());
+            flag=true;
         }
         if (postQuery.getContent() != null) {
             queryWrapper.eq("content", postQuery.getContent());
+            flag=true;
         }
         if (postQuery.getUserId() != null) {
             queryWrapper.eq("user_id", postQuery.getUserId());
+            flag=true;
         }
         if (postQuery.getStatus() != null) {
             queryWrapper.eq("status", postQuery.getStatus());
+            flag=true;
         }
-        if (postQuery.getCollection()!=null){
+        if (postQuery.getCollection().size()!=0){
             queryWrapper.in("id",postQuery.getCollection());
+            flag=true;
+
+        }
+        if (!flag){
+            queryWrapper.eq("id",0);
         }
     }
 }
