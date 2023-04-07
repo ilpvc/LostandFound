@@ -7,6 +7,7 @@ import com.example.lostandfound.entity.Post;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.entity.VO.PostQuery;
 import com.example.lostandfound.service.PostService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/lostandfound/post")
 @CrossOrigin
+@Slf4j
 public class PostController {
 
 
@@ -98,11 +100,14 @@ public class PostController {
 
     @PostMapping("/condition")
     public R PostCondition(@RequestBody PostQuery postQuery) {
+        log.info(postQuery.getCollection().toString());
         queryWrapper = new QueryWrapper<>();
         setQueryWrapper(postQuery);
         List<Post> posts = postService.list(queryWrapper);
         return R.ok().data("list", posts).data("num", posts.size());
     }
+
+
 
 
 
@@ -121,6 +126,9 @@ public class PostController {
         }
         if (postQuery.getStatus() != null) {
             queryWrapper.eq("status", postQuery.getStatus());
+        }
+        if (postQuery.getCollection()!=null){
+            queryWrapper.in("id",postQuery.getCollection());
         }
     }
 }

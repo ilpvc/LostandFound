@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -62,6 +63,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                     filterChain.doFilter(request, response);
                 }else {
                     log.info("认证成功");
+                    redisCache.expire("token-user-" + email,2, TimeUnit.DAYS);
                     filterChain.doFilter(request, response);
                 }
             } else {

@@ -56,7 +56,7 @@ public class LoginController {
         String jwt = JwtUtil.createJWT(myUserDetails.toString());
         //更新缓存
         userController.getAllUserAndCache();
-        setCacheLoginUser(myUserDetails.getEmail(),jwt,60);
+        setCacheLoginUser(myUserDetails.getEmail(),jwt,2);
 
         User email = userService.getOne(new QueryWrapper<User>().eq("email", loginParams.getEmail()));
 
@@ -65,6 +65,6 @@ public class LoginController {
 
 
     private void setCacheLoginUser(String s,String token,int time){
-        redisCache.setCacheObject("token-user-"+s,token,time, TimeUnit.MINUTES);
+        redisCache.setCacheObject("token-user-"+s,token,time, TimeUnit.DAYS);
     }
 }
