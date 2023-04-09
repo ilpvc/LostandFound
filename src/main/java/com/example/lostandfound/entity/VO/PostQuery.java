@@ -41,6 +41,4 @@ public class PostQuery {
 
 
     private Collection<Integer> collection;
-
-    private Collection<Integer> collectionUserId;
 }

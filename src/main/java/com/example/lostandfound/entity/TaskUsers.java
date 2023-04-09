@@ -1,7 +1,9 @@
 package com.example.lostandfound.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
@@ -39,11 +41,11 @@ public class TaskUsers implements Serializable {
     private Integer userId;
 
     @ApiModelProperty("任务用户关系创建时间")
-    @TableField(value = "create_time",fill = FieldFill.INSERT)
+    @TableField("create_time")
     private Date createTime;
 
     @ApiModelProperty("任务用户关系更新时间")
-    @TableField(value = "update_time",fill = FieldFill.INSERT_UPDATE)
+    @TableField("update_time")
     private Date updateTime;
 
 

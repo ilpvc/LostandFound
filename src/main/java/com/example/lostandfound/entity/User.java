@@ -92,11 +92,11 @@ public class User implements Serializable {
     private Integer integral;
 
     @ApiModelProperty("创建时间")
-    @TableField(value = "created_time",fill = FieldFill.INSERT)
+    @TableField("created_time")
     private Date createdTime;
 
     @ApiModelProperty("更新时间")
-    @TableField(value = "updated_time",fill = FieldFill.INSERT_UPDATE)
+    @TableField("updated_time")
     private Date updatedTime;
 
 
