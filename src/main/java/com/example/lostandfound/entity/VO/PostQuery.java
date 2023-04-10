@@ -40,5 +40,13 @@ public class PostQuery {
     private Integer status;
 
 
+    /**
+     * 按照帖子id集合查询帖子
+     */
     private Collection<Integer> collection;
+
+    /**
+     * 按照用户集合匹配帖子
+     */
+    private Collection<Integer> collectionUserId;
 }

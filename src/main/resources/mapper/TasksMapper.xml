@@ -8,8 +8,8 @@
         <result column="task_name" property="taskName" />
         <result column="points" property="points" />
         <result column="description" property="description" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createdTime" />
+        <result column="update_time" property="updatedTime" />
     </resultMap>
 
 </mapper>

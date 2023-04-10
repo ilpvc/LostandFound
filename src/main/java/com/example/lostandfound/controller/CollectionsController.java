@@ -1,8 +1,18 @@
 package com.example.lostandfound.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.lostandfound.entity.Attention;
+import com.example.lostandfound.entity.Collections;
+import com.example.lostandfound.entity.Likes;
+import com.example.lostandfound.entity.VO.AttentionQuery;
+import com.example.lostandfound.entity.VO.CollectionQuery;
+import com.example.lostandfound.entity.VO.LikesQuery;
+import com.example.lostandfound.entity.VO.R;
+import com.example.lostandfound.service.CollectionsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Description:
@@ -14,4 +24,52 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/lostandfound/Collections")
 @CrossOrigin
 public class CollectionsController {
+
+
+    @Autowired
+    CollectionsService collectionsService;
+
+    QueryWrapper<Collections> queryWrapper;
+
+    @PostMapping("/addCollections")
+    public R addCollection(@RequestBody Collections collections) {
+        boolean save = collectionsService.save(collections);
+        if (save) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
+
+    @PostMapping("/delete")
+    public R deleteCollections(@RequestBody CollectionQuery query) {
+        boolean flag = collectionsService.remove(
+                new QueryWrapper<Collections>()
+                        .eq("user_id",query.getUserId())
+                        .eq("post_id",query.getPostId())
+        );
+        if (flag) {
+            return R.ok().message("删除成功");
+        } else {
+            return R.error().message("删除失败");
+        }
+    }
+
+    @PostMapping("/condition")
+    public R getCollectionByCondition(@RequestBody CollectionQuery query) {
+        queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(query);
+        List<Collections> collections = collectionsService.list(queryWrapper);
+        return R.ok().data("list", collections).data("num", collections.size());
+    }
+
+    private void setQueryWrapper(CollectionQuery query){
+        if (query.getUserId() != null) {
+            queryWrapper.eq("user_id", query.getUserId());
+        }
+        if (query.getPostId() != null) {
+            queryWrapper.eq("post_id", query.getPostId());
+        }
+
+    }
 }

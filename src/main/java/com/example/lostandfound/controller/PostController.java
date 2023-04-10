@@ -132,10 +132,13 @@ public class PostController {
             queryWrapper.eq("status", postQuery.getStatus());
             flag=true;
         }
-        if (postQuery.getCollection().size()!=0){
+        if (postQuery.getCollection()!=null&&postQuery.getCollection().size()!=0){
             queryWrapper.in("id",postQuery.getCollection());
             flag=true;
-
+        }
+        if (postQuery.getCollectionUserId()!=null&&postQuery.getCollectionUserId().size()!=0){
+            queryWrapper.in("id",postQuery.getCollectionUserId());
+            flag=true;
         }
         if (!flag){
             queryWrapper.eq("id",0);

@@ -3,7 +3,10 @@ package com.example.lostandfound.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.lostandfound.entity.Collections;
 import com.example.lostandfound.entity.Likes;
+import com.example.lostandfound.entity.VO.CollectionQuery;
+import com.example.lostandfound.entity.VO.LikesQuery;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.service.LikesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +53,7 @@ public class LikesController {
     }
 
 
-    @PostMapping("/addlikes")
+    @PostMapping("/addLikes")
     public R addLikes(@RequestBody Likes likes) {
         boolean save = likesService.save(likes);
         if (save) {
@@ -70,10 +73,13 @@ public class LikesController {
         }
     }
 
-    @DeleteMapping("/{id}")
-    public R deleteLikes(@PathVariable int id) {
-
-        boolean flag = likesService.removeById(id);
+    @PostMapping("/delete")
+    public R deleteLikes(@RequestBody LikesQuery query) {
+        boolean flag = likesService.remove(
+                new QueryWrapper<Likes>()
+                        .eq("user_id",query.getUserId())
+                        .eq("post_id",query.getPostId())
+        );
         if (flag) {
             return R.ok().message("删除成功");
         } else {
@@ -87,6 +93,26 @@ public class LikesController {
         queryWrapper.eq("user_id",id);
         List<Likes> likes = likesService.list(queryWrapper);
         return R.ok().data("list",likes);
+    }
+
+
+
+    @PostMapping("/condition")
+    public R getCollectionByCondition(@RequestBody LikesQuery query) {
+        queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(query);
+        List<Likes> likes = likesService.list(queryWrapper);
+        return R.ok().data("list", likes).data("num", likes.size());
+    }
+
+    private void setQueryWrapper(LikesQuery query){
+        if (query.getUserId() != null) {
+            queryWrapper.eq("user_id", query.getUserId());
+        }
+        if (query.getPostId() != null) {
+            queryWrapper.eq("post_id", query.getPostId());
+        }
+
     }
 
 }

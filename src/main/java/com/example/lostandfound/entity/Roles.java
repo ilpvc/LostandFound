@@ -1,10 +1,7 @@
 package com.example.lostandfound.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
@@ -43,12 +40,12 @@ public class Roles implements Serializable {
     private String description;
 
     @ApiModelProperty("创建时间")
-    @TableField("created_time")
+    @TableField(value = "created_time",fill = FieldFill.INSERT)
     private Date createdTime;
 
-    @ApiModelProperty("删除时间")
-    @TableField("update_time")
-    private Date updateTime;
+    @ApiModelProperty("更新时间")
+    @TableField(value = "updated_time",fill = FieldFill.INSERT_UPDATE)
+    private Date updatedTime;
 
     @ApiModelProperty("是否逻辑删除：0-未删除，1-已删除")
     @TableField("is_deleted")
