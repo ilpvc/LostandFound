@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.lostandfound.entity.Tasks;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.service.TasksService;
+import com.example.lostandfound.utils.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +26,11 @@ public class TasksController {
     @Autowired
     TasksService tasksService;
 
+    @Autowired
+    RedisCache redisCache;
 
     @GetMapping("/")
     public R getAllTasks() {
-
         return R.ok().data("list", tasksService.list());
     }
 
