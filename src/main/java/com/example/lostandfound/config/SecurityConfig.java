@@ -53,7 +53,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(new AntPathRequestMatcher("/lostandfound/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/lostandfound/**","/static/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
                 ).formLogin((formLoginConfigurer)->{
                     formLoginConfigurer.disable();
