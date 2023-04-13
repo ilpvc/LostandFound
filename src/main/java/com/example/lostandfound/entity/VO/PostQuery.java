@@ -39,6 +39,7 @@ public class PostQuery {
     @ApiModelProperty("状态（1：正常，2：待审核，3：已删除，4：已禁用，5：已完成）")
     private Integer status;
 
+    private String searchInfo;
 
     /**
      * 按照帖子id集合查询帖子

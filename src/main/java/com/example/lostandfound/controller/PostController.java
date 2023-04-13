@@ -117,11 +117,15 @@ public class PostController {
             flag=true;
         }
         if (postQuery.getTitle() != null) {
-            queryWrapper.eq("title", postQuery.getTitle());
+            queryWrapper.like("title", postQuery.getTitle());
+            flag=true;
+        }
+        if (postQuery.getSearchInfo()!=null){
+            queryWrapper.like("title", postQuery.getSearchInfo()).or().like("content",postQuery.getSearchInfo());
             flag=true;
         }
         if (postQuery.getContent() != null) {
-            queryWrapper.eq("content", postQuery.getContent());
+            queryWrapper.like("content", postQuery.getContent());
             flag=true;
         }
         if (postQuery.getUserId() != null) {
