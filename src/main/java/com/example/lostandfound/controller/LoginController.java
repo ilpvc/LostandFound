@@ -53,6 +53,9 @@ public class LoginController {
         Authentication authenticate = authenticationManager.authenticate(token);
 
         MyUserDetails myUserDetails = (MyUserDetails) userDetailsService.loadUserByUsername(loginParams.getEmail());
+        if (myUserDetails == null){
+            return R.error().message("账号不存在，登录失败");
+        }
         String jwt = JwtUtil.createJWT(myUserDetails.toString());
         //更新缓存
         userController.getAllUserAndCache();

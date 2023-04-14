@@ -32,6 +32,9 @@ public class AttentionController {
 
     @PostMapping("/addAttention")
     public R addAttention(@RequestBody Attention attention) {
+        if (attention.getAttentionUserId()==null){
+            return R.error().message("还没有登录，关注失败");
+        }
         boolean save = attentionService.save(attention);
         if (save) {
             return R.ok().message("关注成功");

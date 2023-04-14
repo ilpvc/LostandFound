@@ -132,8 +132,8 @@ public class PostController {
             queryWrapper.eq("user_id", postQuery.getUserId());
             flag=true;
         }
-        if (postQuery.getStatus() != null) {
-            queryWrapper.eq("status", postQuery.getStatus());
+        if (postQuery.getStatus() != null&&postQuery.getStatus().size()!=0) {
+            queryWrapper.in("status", postQuery.getStatus());
             flag=true;
         }
         if (postQuery.getCollection()!=null&&postQuery.getCollection().size()!=0){
