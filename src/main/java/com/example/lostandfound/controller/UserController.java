@@ -182,7 +182,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/condition")
-    public R UserCondition(@RequestBody UserQuery userQuery) {
+    public R getUserByCondition(@RequestBody UserQuery userQuery) {
         queryWrapper = new QueryWrapper<>();
         setQueryWrapper(userQuery);
         List<User> users = userService.list(queryWrapper);

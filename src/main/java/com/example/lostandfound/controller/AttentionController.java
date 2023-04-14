@@ -2,6 +2,7 @@ package com.example.lostandfound.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.lostandfound.entity.Attention;
+import com.example.lostandfound.entity.User;
 import com.example.lostandfound.entity.VO.AttentionQuery;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.service.AttentionService;
@@ -28,6 +29,28 @@ public class AttentionController {
     AttentionService attentionService;
     QueryWrapper<Attention> queryWrapper;
 
+
+    @PostMapping("/addAttention")
+    public R addAttention(@RequestBody Attention attention) {
+        boolean save = attentionService.save(attention);
+        if (save) {
+            return R.ok().message("关注成功");
+        } else {
+            return R.error().message("关注失败");
+        }
+    }
+
+    @PostMapping("/delete")
+    public R deleteAttention(@RequestBody AttentionQuery query) {
+        queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(query);
+        boolean save = attentionService.remove(queryWrapper);
+        if (save) {
+            return R.ok().message("取消关注");
+        } else {
+            return R.error().message("取消失败");
+        }
+    }
     @PostMapping("/condition")
     public R attentionCondition(@RequestBody AttentionQuery attentionQuery) {
         queryWrapper = new QueryWrapper<>();

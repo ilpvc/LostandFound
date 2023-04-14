@@ -141,7 +141,7 @@ public class PostController {
             flag=true;
         }
         if (postQuery.getCollectionUserId()!=null&&postQuery.getCollectionUserId().size()!=0){
-            queryWrapper.in("id",postQuery.getCollectionUserId());
+            queryWrapper.in("user_id",postQuery.getCollectionUserId());
             flag=true;
         }
         if (!flag){
