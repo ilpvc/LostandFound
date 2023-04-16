@@ -33,12 +33,24 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         Claims parseToken;
         String token = request.getHeader("Token");
-        response.addHeader("Access-Control-Expose-Headers","status");
-        if ("/lostandfound/login/".equals(request.getRequestURI())){
+        response.addHeader("Access-Control-Expose-Headers", "status");
+        if ("/lostandfound/login/".equals(request.getRequestURI())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        if (request.getRequestURI().contains("/lostandfound/post/") ||
+                request.getRequestURI().contains("/lostandfound/user/") ||
+                request.getRequestURI().contains("/static/") ||
+                request.getRequestURI().contains("/lostandfound/attribute/") ||
+                request.getRequestURI().contains("/swagger-ui/") ||
+                request.getRequestURI().contains("/api-docs")
+
+        ) {
             filterChain.doFilter(request, response);
             return;
         }
         if (token == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.addIntHeader("status", 403);
             filterChain.doFilter(request, response);
         } else {
@@ -61,9 +73,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                     log.info("认证失败====");
                     response.addIntHeader("status", 403);
                     filterChain.doFilter(request, response);
-                }else {
+                } else {
                     log.info("认证成功");
-                    redisCache.expire("token-user-" + email,2, TimeUnit.DAYS);
+                    redisCache.expire("token-user-" + email, 2, TimeUnit.DAYS);
                     filterChain.doFilter(request, response);
                 }
             } else {

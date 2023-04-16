@@ -18,6 +18,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -53,7 +54,9 @@ public class LoginController {
         Authentication authenticate = authenticationManager.authenticate(token);
 
         MyUserDetails myUserDetails = (MyUserDetails) userDetailsService.loadUserByUsername(loginParams.getEmail());
-        if (myUserDetails == null){
+        if (!Objects.equals(myUserDetails.getUsername(), loginParams.getNickName())){
+            return R.error().message("用户名错误");        }
+        if (Objects.isNull(myUserDetails)){
             return R.error().message("账号不存在，登录失败");
         }
         String jwt = JwtUtil.createJWT(myUserDetails.toString());
