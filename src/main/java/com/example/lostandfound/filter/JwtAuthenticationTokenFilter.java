@@ -53,6 +53,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.addIntHeader("status", 403);
             filterChain.doFilter(request, response);
+            return;
         } else {
             try {
                 parseToken = JwtUtil.parseJWT(token);
