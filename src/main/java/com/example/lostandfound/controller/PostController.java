@@ -106,11 +106,19 @@ public class PostController {
         return R.ok().data("list", posts).data("num", posts.size());
     }
 
+    @PostMapping("/normalCondition")
+    public R PostNormalCondition(@RequestBody PostQuery postQuery) {
+        queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("status", postQuery.getStatus());
+        List<Post> posts = postService.list(queryWrapper);
+        return R.ok().data("list", posts).data("num", posts.size());
+    }
 
 
 
 
     private void setQueryWrapper(PostQuery postQuery){
+        log.info(postQuery.toString());
         boolean flag = false;
         if (postQuery.getType() != null) {
             queryWrapper.eq("type", postQuery.getType());
@@ -134,7 +142,6 @@ public class PostController {
         }
         if (postQuery.getStatus() != null&&postQuery.getStatus().size()!=0) {
             queryWrapper.in("status", postQuery.getStatus());
-            flag=true;
         }
         if (postQuery.getCollection()!=null&&postQuery.getCollection().size()!=0){
             queryWrapper.in("id",postQuery.getCollection());

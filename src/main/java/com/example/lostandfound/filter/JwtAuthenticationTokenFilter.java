@@ -72,7 +72,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 String jwt = redisCache.getCacheObject("token-user-" + email);
                 if (token.isEmpty() || !token.equals(jwt)) {
                     log.info("认证失败====");
-                    response.addIntHeader("status", 403);
+                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                     filterChain.doFilter(request, response);
                 } else {
                     log.info("认证成功");
@@ -81,7 +81,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 }
             } else {
                 log.info("认证失败====");
-                response.setIntHeader("status", 403);
+                response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                 filterChain.doFilter(request, response);
             }
         }
