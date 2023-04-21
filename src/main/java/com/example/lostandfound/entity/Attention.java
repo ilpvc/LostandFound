@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -23,7 +22,6 @@ import java.io.Serializable;
 @ApiModel(value = "attention对象", description = "关注表")
 public class Attention implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("ID")

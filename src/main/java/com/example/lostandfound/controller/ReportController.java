@@ -1,6 +1,7 @@
 package com.example.lostandfound.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.lostandfound.entity.Post;
 import com.example.lostandfound.entity.Report;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.entity.VO.ReportQuery;
@@ -27,6 +28,37 @@ public class ReportController {
     ReportService reportService;
 
     private QueryWrapper<Report> queryWrapper;
+
+    @PostMapping("/addReport")
+    public R addReport(@RequestBody Report report) {
+        boolean save = reportService.save(report);
+        if (save) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public R deleteReport(@PathVariable int id) {
+
+        boolean flag = reportService.removeById(id);
+        if (flag) {
+            return R.ok().message("删除成功");
+        } else {
+            return R.error().message("删除失败");
+        }
+    }
+
+    @PutMapping("/updateReport")
+    public R updateReport(@RequestBody Report report) {
+        boolean b = reportService.updateById(report);
+        if (b) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
 
     @PostMapping("/condition")
     public R getReportByCondition(@RequestBody ReportQuery reportQuery) {
