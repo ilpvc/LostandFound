@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.lostandfound.entity.MyUserDetails;
 import com.example.lostandfound.entity.User;
 import com.example.lostandfound.entity.VO.LoginParams;
+import com.example.lostandfound.entity.VO.Mail;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.service.UserService;
 import com.example.lostandfound.service.impl.UserDetailsServiceImpl;
 import com.example.lostandfound.utils.JwtUtil;
+import com.example.lostandfound.utils.MailUtils;
 import com.example.lostandfound.utils.RedisCache;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -69,6 +71,13 @@ public class LoginController {
         return R.ok().data("token",jwt).data("user",email);
     }
 
+    @PostMapping("/mail")
+    public void getEmailCode(@RequestBody Mail mail){
+        if (mail.getUserEmail()!=null) {
+            String code = MailUtils.sendMail(mail.getUserEmail());
+            redisCache.setCacheObject("email-code-"+mail.getUserEmail(),code,2,TimeUnit.MINUTES);
+        }
+    }
 
     private void setCacheLoginUser(String s,String token,int time){
         redisCache.setCacheObject("token-user-"+s,token,time, TimeUnit.DAYS);

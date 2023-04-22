@@ -9,12 +9,14 @@ import com.example.lostandfound.entity.VO.UserQuery;
 import com.example.lostandfound.service.LikesService;
 import com.example.lostandfound.service.UserSecurityService;
 import com.example.lostandfound.service.UserService;
+import com.example.lostandfound.utils.RedisCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Description:
@@ -39,6 +41,9 @@ public class RegisterController {
     @Autowired
     UserSecurityService userSecurityService;
 
+    @Autowired
+    RedisCache redisCache;
+
     @PostMapping("/")
     public R register(@RequestBody LoginParams loginParams) {
         User user = new User();
@@ -52,6 +57,10 @@ public class RegisterController {
             user.setNickname(loginParams.getNickName());
             userSecurity.setNickname(loginParams.getNickName());
 
+            String code = redisCache.getCacheObject("email-code-" + loginParams.getEmail());
+            if (!Objects.equals(code, loginParams.getCode())){
+                return R.error().message("验证码错误或邮箱不存在");
+            }
             user.setEmail(loginParams.getEmail());
             userSecurity.setEmail(loginParams.getEmail());
             userSecurity.setPassword("{bcrypt}"+passwordEncoder.encode(loginParams.getPassword()));

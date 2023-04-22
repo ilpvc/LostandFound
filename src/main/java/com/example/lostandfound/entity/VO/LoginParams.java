@@ -16,4 +16,6 @@ public class LoginParams {
     private String password;
 
     private String email;
+
+    private String code;
 }
