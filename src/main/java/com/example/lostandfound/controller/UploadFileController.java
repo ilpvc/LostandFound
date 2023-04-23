@@ -10,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Description:
@@ -33,14 +35,15 @@ public class UploadFileController {
             try {
                 byte[] bytes = file.getBytes();
                 String outputPath = "D:/static/image/";
-                String outputFile = outputPath + file.getOriginalFilename();
+                String fileName = UUID.randomUUID().toString()+ "."+Objects.requireNonNull(file.getContentType()).split("/")[1];
+                String outputFile = outputPath + fileName;
                 OutputStream outputStream = new FileOutputStream(outputFile);
                 outputStream.write(bytes, 0, bytes.length);
                 outputStream.close();
                 images.getImages().add(outputFile);
-                log.info(images.getImages().toString());
+                log.info(file.getContentType());
                 // TODO: 处理文件
-                return "http://localhost:8080/static/image/"+file.getOriginalFilename();
+                return "http://localhost:8080/static/image/"+fileName;
             } catch (IOException e) {
                 // TODO: 处理异常
                 return "上传失败：" + e.getMessage();
