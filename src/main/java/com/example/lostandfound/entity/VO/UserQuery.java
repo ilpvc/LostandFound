@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -50,6 +51,11 @@ public class UserQuery {
 
     @ApiModelProperty("状态 1、正常 2、封禁")
     private Integer status;
+
+    /**
+     * 按照用户集合匹配帖子
+     */
+    private Collection<Integer> userIds;
 
     @ApiModelProperty("用户积分")
     private Integer integral;

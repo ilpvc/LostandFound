@@ -210,5 +210,9 @@ public class UserController {
         if (userQuery.getStatus() != null) {
             queryWrapper.eq("status", userQuery.getStatus());
         }
+        if (userQuery.getUserIds()!=null&&userQuery.getUserIds().size()!=0){
+            queryWrapper.in("id",userQuery.getUserIds());
+        }
+
     }
 }
