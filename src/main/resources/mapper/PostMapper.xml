@@ -11,6 +11,8 @@
         <result column="content" property="content" />
         <result column="count" property="count" />
         <result column="user_id" property="userId" />
+        <result column="tags" property="tags"/>
+        <result column="user_nickname" property="userNickname" />
         <result column="created_time" property="createdTime" />
         <result column="updated_time" property="updatedTime" />
         <result column="is_deleted" property="isDeleted" />

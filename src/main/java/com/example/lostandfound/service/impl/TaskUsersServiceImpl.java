@@ -5,6 +5,7 @@ import com.example.lostandfound.mapper.TaskUsersMapper;
 import com.example.lostandfound.service.TaskUsersService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2023-03-22 09:28:33
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class TaskUsersServiceImpl extends ServiceImpl<TaskUsersMapper, TaskUsers> implements TaskUsersService {
 
 }

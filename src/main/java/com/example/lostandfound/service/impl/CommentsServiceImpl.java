@@ -5,6 +5,7 @@ import com.example.lostandfound.mapper.CommentsMapper;
 import com.example.lostandfound.service.CommentsService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2023-03-22 09:28:33
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class CommentsServiceImpl extends ServiceImpl<CommentsMapper, Comments> implements CommentsService {
 
 }

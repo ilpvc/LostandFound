@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -110,6 +112,7 @@ public class PostController {
     public R PostNormalCondition(@RequestBody PostQuery postQuery) {
         queryWrapper = new QueryWrapper<>();
         queryWrapper.in("status", postQuery.getStatus());
+        queryWrapper.in("type",new ArrayList<Integer>(Arrays.asList(1,2,3)));
         List<Post> posts = postService.list(queryWrapper);
         return R.ok().data("list", posts).data("num", posts.size());
     }
@@ -120,8 +123,8 @@ public class PostController {
     private void setQueryWrapper(PostQuery postQuery){
         log.info(postQuery.toString());
         boolean flag = false;
-        if (postQuery.getType() != null) {
-            queryWrapper.eq("type", postQuery.getType());
+        if (postQuery.getTypes() != null&&postQuery.getTypes().size()!=0) {
+            queryWrapper.in("type", postQuery.getTypes());
             flag=true;
         }
         if (postQuery.getTitle() != null) {

@@ -54,9 +54,16 @@ public class Post implements Serializable {
     @TableField("user_id")
     private Integer userId;
 
+    @TableField("user_nickname")
+    private String userNickname;
+
+    @TableField("tags")
+    private String tags;
+
     @ApiModelProperty("创建时间")
     @TableField(value = "created_time",fill = FieldFill.INSERT)
     private Date createdTime;
+
 
     @ApiModelProperty("更新时间")
     @TableField(value = "updated_time",fill = FieldFill.INSERT_UPDATE)

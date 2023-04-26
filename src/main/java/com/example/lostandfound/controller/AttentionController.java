@@ -25,10 +25,12 @@ import java.util.List;
 public class AttentionController {
 
 
-    @Autowired
     AttentionService attentionService;
-    QueryWrapper<Attention> queryWrapper;
+    AttentionController(AttentionService attentionService){
+        this.attentionService = attentionService;
+    }
 
+    QueryWrapper<Attention> queryWrapper;
 
     @PostMapping("/addAttention")
     public R addAttention(@RequestBody Attention attention) {

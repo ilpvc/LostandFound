@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -40,6 +41,8 @@ public class PostQuery {
     private Collection<Integer> status;
 
     private String searchInfo;
+
+    private ArrayList<Integer> types;
 
     /**
      * 按照帖子id集合查询帖子

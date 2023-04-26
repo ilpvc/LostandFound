@@ -2,6 +2,8 @@ package com.example.lostandfound.entity.VO;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+
 /**
  * Description:
  *
@@ -15,4 +17,6 @@ public class LikesQuery {
     private Integer userId;
 
     private Integer postId;
+
+    private ArrayList<Integer> postIds;
 }

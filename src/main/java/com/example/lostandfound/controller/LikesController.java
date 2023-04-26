@@ -9,6 +9,7 @@ import com.example.lostandfound.entity.VO.CollectionQuery;
 import com.example.lostandfound.entity.VO.LikesQuery;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.service.LikesService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/lostandfound/likes")
 @CrossOrigin
+@Slf4j
 public class LikesController {
 
     @Autowired
@@ -106,13 +108,16 @@ public class LikesController {
     }
 
     private void setQueryWrapper(LikesQuery query){
+        log.info(query.toString());
         if (query.getUserId() != null) {
             queryWrapper.eq("user_id", query.getUserId());
         }
         if (query.getPostId() != null) {
             queryWrapper.eq("post_id", query.getPostId());
         }
-
+        if (query.getPostIds()!=null&&query.getPostIds().size()!=0){
+            queryWrapper.in("post_id", query.getPostIds());
+        }
     }
 
 }

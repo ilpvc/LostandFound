@@ -5,6 +5,7 @@ import com.example.lostandfound.mapper.UserRoleMapper;
 import com.example.lostandfound.service.UserRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
  * @since 2023-03-22 09:28:33
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements UserRoleService {
 
 }
