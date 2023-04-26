@@ -2,11 +2,8 @@ package com.example.lostandfound.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.lostandfound.entity.MyUserDetails;
-import com.example.lostandfound.entity.User;
 import com.example.lostandfound.entity.UserSecurity;
 import com.example.lostandfound.mapper.UserSecurityMapper;
-import com.example.lostandfound.repository.UserRepository;
-import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,8 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+//    @Autowired
     private UserSecurityMapper userSecurityMapper;
-
+    @Autowired
     UserDetailsServiceImpl(UserSecurityMapper userSecurityMapper){
         this.userSecurityMapper = userSecurityMapper;
     }

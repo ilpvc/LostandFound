@@ -25,7 +25,9 @@ public class DruidConfig {
     @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
     public DataSource druidDataSource() throws SQLException {
-        return new DruidDataSource();
+        DruidDataSource druidDataSource = new DruidDataSource();
+        druidDataSource.setFilters("stat");
+        return druidDataSource;
     }
 
 

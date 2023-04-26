@@ -53,8 +53,9 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(new AntPathRequestMatcher("/lostandfound/**","/static/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/lostandfound/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/lostandfound/login/")).permitAll()
                 ).formLogin((formLoginConfigurer)->{
                     formLoginConfigurer.disable();
                 }).addFilterAt(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);

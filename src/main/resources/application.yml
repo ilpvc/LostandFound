@@ -17,25 +17,26 @@ spring:
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
-
     #2.连接池配置
     #初始化连接池的连接数量 大小，最小，最大
-    initial-size: 20
-    min-idle: 5
-    max-active: 30
-    #配置获取连接等待超时的时间
-    max-wait: 60000
-    #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-    time-between-eviction-runs-millis: 60000
-    # 配置一个连接在池中最小生存的时间，单位是毫秒
-    min-evictable-idle-time-millis: 30000
-    validation-query: SELECT 1
-    test-while-idle: true
-    test-on-borrow: true
-    test-on-return: false
-    # 是否缓存preparedStatement，也就是PSCache  官方建议MySQL下建议关闭   个人建议如果想用SQL防火墙 建议打开
-    pool-prepared-statements: true
-    max-pool-prepared-statement-per-connection-size: 20
+    druid:
+      initial-size: 20
+      min-idle: 5
+      max-active: 30
+      #配置获取连接等待超时的时间
+      max-wait: 60000
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 30000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: false
+      # 是否缓存preparedStatement，也就是PSCache  官方建议MySQL下建议关闭   个人建议如果想用SQL防火墙 建议打开
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+
   # redis配置
   data:
     redis:

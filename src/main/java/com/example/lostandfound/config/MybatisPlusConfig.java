@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan("com.example.lostandfound.*.mapper")
+@MapperScan("com.example.lostandfound.mapper")
 public class MybatisPlusConfig {
 
     @Autowired

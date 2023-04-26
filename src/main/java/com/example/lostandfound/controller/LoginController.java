@@ -56,6 +56,7 @@ public class LoginController {
         Authentication authenticate = authenticationManager.authenticate(token);
 
         MyUserDetails myUserDetails = (MyUserDetails) userDetailsService.loadUserByUsername(loginParams.getEmail());
+        log.info("进入控制器");
         if (!Objects.equals(myUserDetails.getUsername(), loginParams.getNickName())){
             return R.error().message("用户名错误");        }
         if (Objects.isNull(myUserDetails)){
