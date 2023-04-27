@@ -112,50 +112,73 @@ public class PostController {
     public R PostNormalCondition(@RequestBody PostQuery postQuery) {
         queryWrapper = new QueryWrapper<>();
         queryWrapper.in("status", postQuery.getStatus());
-        queryWrapper.in("type",new ArrayList<Integer>(Arrays.asList(1,2,3)));
+        queryWrapper.in("type", new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
         List<Post> posts = postService.list(queryWrapper);
         return R.ok().data("list", posts).data("num", posts.size());
     }
 
 
+    @PostMapping("/rank")
+    public R getPostByRank(@RequestBody PostQuery postQuery) {
+        QueryWrapper<Post> queryWrapper1 = new QueryWrapper<>();
+        if (postQuery.getRankType()==1){
+            queryWrapper1.orderByDesc("comment_num");
+            queryWrapper1.last("limit 3");
+            List<Post> posts = postService.list(queryWrapper1);
+            return R.ok().data("list",posts);
+        }else if (postQuery.getRankType()==2){
+            queryWrapper1.orderByDesc("likes_num");
+            queryWrapper1.last("limit 3");
+            List<Post> posts = postService.list(queryWrapper1);
+            return R.ok().data("list",posts);
+        }else if(postQuery.getRankType()==3){
+            queryWrapper1.orderByDesc("count");
+            queryWrapper1.last("limit 3");
+            List<Post> posts = postService.list(queryWrapper1);
+            return R.ok().data("list",posts);
+        }else{
+            return R.error().message("错误参数");
+        }
+    }
 
 
-    private void setQueryWrapper(PostQuery postQuery){
-        log.info(postQuery.toString());
-        boolean flag = false;
-        if (postQuery.getTypes() != null&&postQuery.getTypes().size()!=0) {
-            queryWrapper.in("type", postQuery.getTypes());
-            flag=true;
-        }
-        if (postQuery.getTitle() != null) {
-            queryWrapper.like("title", postQuery.getTitle());
-            flag=true;
-        }
-        if (postQuery.getSearchInfo()!=null){
-            queryWrapper.like("title", postQuery.getSearchInfo()).or().like("content",postQuery.getSearchInfo());
-            flag=true;
-        }
-        if (postQuery.getContent() != null) {
-            queryWrapper.like("content", postQuery.getContent());
-            flag=true;
-        }
-        if (postQuery.getUserId() != null) {
-            queryWrapper.eq("user_id", postQuery.getUserId());
-            flag=true;
-        }
-        if (postQuery.getStatus() != null&&postQuery.getStatus().size()!=0) {
-            queryWrapper.in("status", postQuery.getStatus());
-        }
-        if (postQuery.getCollection()!=null&&postQuery.getCollection().size()!=0){
-            queryWrapper.in("id",postQuery.getCollection());
-            flag=true;
-        }
-        if (postQuery.getCollectionUserId()!=null&&postQuery.getCollectionUserId().size()!=0){
-            queryWrapper.in("user_id",postQuery.getCollectionUserId());
-            flag=true;
-        }
-        if (!flag){
-            queryWrapper.eq("id",0);
+    private void setQueryWrapper(PostQuery postQuery) {
+        synchronized (this) {
+            boolean flag = false;
+            if (postQuery.getTypes() != null && postQuery.getTypes().size() != 0) {
+                queryWrapper.in("type", postQuery.getTypes());
+                flag = true;
+            }
+            if (postQuery.getTitle() != null) {
+                queryWrapper.like("title", postQuery.getTitle());
+                flag = true;
+            }
+            if (postQuery.getSearchInfo() != null) {
+                queryWrapper.like("title", postQuery.getSearchInfo()).or().like("content", postQuery.getSearchInfo());
+                flag = true;
+            }
+            if (postQuery.getContent() != null) {
+                queryWrapper.like("content", postQuery.getContent());
+                flag = true;
+            }
+            if (postQuery.getUserId() != null) {
+                queryWrapper.eq("user_id", postQuery.getUserId());
+                flag = true;
+            }
+            if (postQuery.getStatus() != null && postQuery.getStatus().size() != 0) {
+                queryWrapper.in("status", postQuery.getStatus());
+            }
+            if (postQuery.getCollection() != null && postQuery.getCollection().size() != 0) {
+                queryWrapper.in("id", postQuery.getCollection());
+                flag = true;
+            }
+            if (postQuery.getCollectionUserId() != null && postQuery.getCollectionUserId().size() != 0) {
+                queryWrapper.in("user_id", postQuery.getCollectionUserId());
+                flag = true;
+            }
+            if (!flag) {
+                queryWrapper.eq("id", 0);
+            }
         }
     }
 }

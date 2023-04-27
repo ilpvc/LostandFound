@@ -1,12 +1,10 @@
 package com.example.lostandfound.entity.VO;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -53,4 +51,9 @@ public class PostQuery {
      * 按照用户集合匹配帖子
      */
     private Collection<Integer> collectionUserId;
+
+    /**
+     * 排名类型(1 comment,2 likes, 3,count)
+     */
+    private Integer rankType;
 }

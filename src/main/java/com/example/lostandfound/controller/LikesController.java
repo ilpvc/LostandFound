@@ -13,11 +13,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author ilpvc
@@ -37,7 +38,6 @@ public class LikesController {
 
     @GetMapping("/")
     public R getAllLikes() {
-
         return R.ok().data("list", likesService.list());
     }
 
@@ -79,8 +79,8 @@ public class LikesController {
     public R deleteLikes(@RequestBody LikesQuery query) {
         boolean flag = likesService.remove(
                 new QueryWrapper<Likes>()
-                        .eq("user_id",query.getUserId())
-                        .eq("post_id",query.getPostId())
+                        .eq("user_id", query.getUserId())
+                        .eq("post_id", query.getPostId())
         );
         if (flag) {
             return R.ok().message("删除成功");
@@ -90,24 +90,31 @@ public class LikesController {
     }
 
     @GetMapping("/User/{id}")
-    public R getPostIdByLikeUserId(@PathVariable int id){
+    public R getPostIdByLikeUserId(@PathVariable int id) {
         queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("user_id",id);
+        queryWrapper.eq("user_id", id);
         List<Likes> likes = likesService.list(queryWrapper);
-        return R.ok().data("list",likes);
+        return R.ok().data("list", likes);
     }
-
 
 
     @PostMapping("/condition")
     public R getCollectionByCondition(@RequestBody LikesQuery query) {
         queryWrapper = new QueryWrapper<>();
         setQueryWrapper(query);
-        List<Likes> likes = likesService.list(queryWrapper);
+        List<Likes> likes = new ArrayList<>();
+        if (query.getPostIds() != null && query.getPostIds().size() != 0) {
+            log.info("postIds");
+            likes = likesService.listByIds(query.getPostIds());
+        } else {
+            log.info("postIdscc");
+            likes = likesService.list(queryWrapper);
+        }
+
         return R.ok().data("list", likes).data("num", likes.size());
     }
 
-    private void setQueryWrapper(LikesQuery query){
+    private void setQueryWrapper(LikesQuery query) {
         log.info(query.toString());
         if (query.getUserId() != null) {
             queryWrapper.eq("user_id", query.getUserId());
@@ -115,9 +122,8 @@ public class LikesController {
         if (query.getPostId() != null) {
             queryWrapper.eq("post_id", query.getPostId());
         }
-        if (query.getPostIds()!=null&&query.getPostIds().size()!=0){
-            queryWrapper.in("post_id", query.getPostIds());
-        }
+
+
     }
 
 }

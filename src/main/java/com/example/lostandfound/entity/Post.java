@@ -57,6 +57,15 @@ public class Post implements Serializable {
     @TableField("user_nickname")
     private String userNickname;
 
+    @TableField("comment_num")
+    private Integer commentNum;
+
+    @TableField("likes_num")
+    private Integer likesNum;
+
+    @TableField("collection_num")
+    private Integer collectionNum;
+
     @TableField("tags")
     private String tags;
 

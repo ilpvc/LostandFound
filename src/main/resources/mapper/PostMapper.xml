@@ -11,6 +11,9 @@
         <result column="content" property="content" />
         <result column="count" property="count" />
         <result column="user_id" property="userId" />
+        <result column="comment_num" property="commentNum"/>
+        <result column="collection_num" property="collectionNum"/>
+        <result column="likes_num" property="likesNum"/>
         <result column="tags" property="tags"/>
         <result column="user_nickname" property="userNickname" />
         <result column="created_time" property="createdTime" />
