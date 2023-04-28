@@ -102,7 +102,8 @@ public class PostController {
 
     @PostMapping("/condition")
     public R PostCondition(@RequestBody PostQuery postQuery) {
-        queryWrapper = new QueryWrapper<>();
+
+
         setQueryWrapper(postQuery);
         List<Post> posts = postService.list(queryWrapper);
         return R.ok().data("list", posts).data("num", posts.size());
@@ -143,12 +144,9 @@ public class PostController {
 
 
     private void setQueryWrapper(PostQuery postQuery) {
+        queryWrapper = new QueryWrapper<>();
         synchronized (this) {
             boolean flag = false;
-            if (postQuery.getTypes() != null && postQuery.getTypes().size() != 0) {
-                queryWrapper.in("type", postQuery.getTypes());
-                flag = true;
-            }
             if (postQuery.getTitle() != null) {
                 queryWrapper.like("title", postQuery.getTitle());
                 flag = true;
@@ -174,6 +172,10 @@ public class PostController {
             }
             if (postQuery.getCollectionUserId() != null && postQuery.getCollectionUserId().size() != 0) {
                 queryWrapper.in("user_id", postQuery.getCollectionUserId());
+                flag = true;
+            }
+            if (postQuery.getTypes() != null && postQuery.getTypes().size() != 0) {
+                queryWrapper.in("type", postQuery.getTypes());
                 flag = true;
             }
             if (!flag) {
