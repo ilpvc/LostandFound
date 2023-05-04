@@ -122,6 +122,9 @@ public class PostController {
     @PostMapping("/rank")
     public R getPostByRank(@RequestBody PostQuery postQuery) {
         QueryWrapper<Post> queryWrapper1 = new QueryWrapper<>();
+        if(postQuery.getTypes()!=null){
+            queryWrapper1.in("type",postQuery.getTypes());
+        }
         if (postQuery.getRankType()==1){
             queryWrapper1.orderByDesc("comment_num");
             queryWrapper1.last("limit 3");
