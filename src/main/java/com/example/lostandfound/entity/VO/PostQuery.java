@@ -56,4 +56,6 @@ public class PostQuery {
      * 排名类型(1 comment,2 likes, 3,count)
      */
     private Integer rankType;
+
+    private String tags;
 }

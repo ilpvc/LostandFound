@@ -29,8 +29,6 @@ import java.util.List;
 @Slf4j
 public class PostController {
 
-
-    private QueryWrapper<Post> queryWrapper;
     @Autowired
     PostService postService;
 
@@ -93,9 +91,9 @@ public class PostController {
                                @PathVariable int pageCount,
                                @RequestBody PostQuery postQuery) {
         Page<Post> page = new Page<>(pageNo, pageCount);
-        queryWrapper = new QueryWrapper<>();
+        QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
 
-        setQueryWrapper(postQuery);
+        setQueryWrapper(postQuery,queryWrapper);
 
         postService.page(page, queryWrapper);
         return R.ok().data("items", page);
@@ -103,16 +101,15 @@ public class PostController {
 
     @PostMapping("/condition")
     public R PostCondition(@RequestBody PostQuery postQuery) {
-
-
-        setQueryWrapper(postQuery);
+        QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(postQuery,queryWrapper);
         List<Post> posts = postService.list(queryWrapper);
         return R.ok().data("list", posts).data("num", posts.size());
     }
 
     @PostMapping("/normalCondition")
     public R PostNormalCondition(@RequestBody PostQuery postQuery) {
-        queryWrapper = new QueryWrapper<>();
+        QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
         queryWrapper.in("status", postQuery.getStatus());
         queryWrapper.in("type", new ArrayList<Integer>(Arrays.asList(1, 2, 3)));
         List<Post> posts = postService.list(queryWrapper);
@@ -147,8 +144,7 @@ public class PostController {
     }
 
 
-    private void setQueryWrapper(PostQuery postQuery) {
-        queryWrapper = new QueryWrapper<>();
+    private void setQueryWrapper(PostQuery postQuery,QueryWrapper<Post> queryWrapper) {
         synchronized (this) {
             boolean flag = false;
             if (postQuery.getTitle() != null) {
@@ -181,6 +177,9 @@ public class PostController {
             if (postQuery.getTypes() != null && postQuery.getTypes().size() != 0) {
                 queryWrapper.in("type", postQuery.getTypes());
                 flag = true;
+            }
+            if (postQuery.getTags()!=null){
+                queryWrapper.like("tags",postQuery.getTags());
             }
             if (!flag) {
                 queryWrapper.eq("id", 0);
