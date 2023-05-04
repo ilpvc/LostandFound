@@ -100,21 +100,19 @@ public class LikesController {
 
     @PostMapping("/condition")
     public R getCollectionByCondition(@RequestBody LikesQuery query) {
-        queryWrapper = new QueryWrapper<>();
-        setQueryWrapper(query);
+        QueryWrapper<Likes> localQueryWrapper = new QueryWrapper<>();
+        setQueryWrapper(query,localQueryWrapper);
         List<Likes> likes = new ArrayList<>();
         if (query.getPostIds() != null && query.getPostIds().size() != 0) {
-            log.info("postIds");
             likes = likesService.listByIds(query.getPostIds());
         } else {
-            log.info("postIdscc");
-            likes = likesService.list(queryWrapper);
+            likes = likesService.list(localQueryWrapper);
         }
 
         return R.ok().data("list", likes).data("num", likes.size());
     }
 
-    private void setQueryWrapper(LikesQuery query) {
+    private void setQueryWrapper(LikesQuery query,QueryWrapper<Likes> queryWrapper) {
         log.info(query.toString());
         if (query.getUserId() != null) {
             queryWrapper.eq("user_id", query.getUserId());

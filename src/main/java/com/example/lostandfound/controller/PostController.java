@@ -57,6 +57,7 @@ public class PostController {
 
     @PostMapping("/addPost")
     public R addPost(@RequestBody Post post) {
+        log.info(post.getImage());
         boolean save = postService.save(post);
         if (save) {
             return R.ok();
