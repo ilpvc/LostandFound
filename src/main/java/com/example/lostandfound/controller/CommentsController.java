@@ -25,7 +25,7 @@ import java.util.List;
 @RequestMapping("/lostandfound/comments")
 @CrossOrigin
 public class CommentsController {
-    private QueryWrapper<Comments> queryWrapper;
+
     @Autowired
     CommentsService commentsService;
 
@@ -99,15 +99,15 @@ public class CommentsController {
 
     @PostMapping("/condition")
     public R CommentsCondition(@RequestBody CommentsQuery commentsQuery) {
-        queryWrapper = new QueryWrapper<>();
-        setQueryWrapper(commentsQuery);
+        QueryWrapper<Comments> queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(commentsQuery,queryWrapper);
         List<Comments> comments = commentsService.list(queryWrapper);
         return R.ok().data("list", comments).data("num", comments.size());
     }
 //
 //
 //
-    private void setQueryWrapper(CommentsQuery commentsQuery){
+    private void setQueryWrapper(CommentsQuery commentsQuery,QueryWrapper<Comments> queryWrapper){
         if (commentsQuery.getCommenterId() != null) {
             queryWrapper.eq("commenter_id", commentsQuery.getCommenterId());
         }
@@ -116,6 +116,9 @@ public class CommentsController {
         }
         if (commentsQuery.getCommentedUserId() != null) {
             queryWrapper.eq("commented_user_id", commentsQuery.getCommentedUserId());
+        }
+        if (commentsQuery.getPostIds() != null) {
+            queryWrapper.eq("post_id", commentsQuery.getPostId());
         }
         if (commentsQuery.getPostId() != null) {
             queryWrapper.eq("post_id", commentsQuery.getPostId());

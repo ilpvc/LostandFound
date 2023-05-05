@@ -8,12 +8,10 @@ import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.entity.VO.UserQuery;
 import com.example.lostandfound.service.UserService;
 import com.example.lostandfound.utils.RedisCache;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +30,6 @@ import java.util.List;
 @Slf4j
 public class UserController {
 
-    private QueryWrapper<User> queryWrapper;
     @Autowired
     UserService userService;
     @Autowired
@@ -60,7 +57,7 @@ public class UserController {
      */
     @GetMapping("/ranking")
     public R getRankingUser(){
-        queryWrapper = new QueryWrapper<>();
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByDesc("find_num");
         queryWrapper.last("limit 10");
         List<User> users = userService.list(queryWrapper);
@@ -168,9 +165,9 @@ public class UserController {
                                @PathVariable int pageCount,
                                @RequestBody UserQuery userQuery) {
         Page<User> page = new Page<>(pageNo, pageCount);
-        queryWrapper = new QueryWrapper<>();
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
 
-        setQueryWrapper(userQuery);
+        setQueryWrapper(userQuery,queryWrapper);
 
         userService.page(page, queryWrapper);
         return R.ok().data("items", page);
@@ -183,15 +180,15 @@ public class UserController {
      */
     @PostMapping("/condition")
     public R getUserByCondition(@RequestBody UserQuery userQuery) {
-        queryWrapper = new QueryWrapper<>();
-        setQueryWrapper(userQuery);
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(userQuery,queryWrapper);
         List<User> users = userService.list(queryWrapper);
         return R.ok().data("list", users).data("num", users.size());
     }
 
 
 
-    private void setQueryWrapper(UserQuery userQuery){
+    private void setQueryWrapper(UserQuery userQuery,QueryWrapper<User> queryWrapper){
         if (userQuery.getAge() != null) {
             queryWrapper.eq("age", userQuery.getAge());
         }

@@ -33,8 +33,6 @@ public class LikesController {
     @Autowired
     LikesService likesService;
 
-    QueryWrapper<Likes> queryWrapper;
-
 
     @GetMapping("/")
     public R getAllLikes() {
@@ -91,7 +89,7 @@ public class LikesController {
 
     @GetMapping("/User/{id}")
     public R getPostIdByLikeUserId(@PathVariable int id) {
-        queryWrapper = new QueryWrapper<>();
+        QueryWrapper<Likes> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_id", id);
         List<Likes> likes = likesService.list(queryWrapper);
         return R.ok().data("list", likes);

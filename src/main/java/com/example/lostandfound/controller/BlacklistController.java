@@ -19,8 +19,6 @@ import java.util.List;
 @Slf4j
 public class BlacklistController {
 
-    private QueryWrapper<Blacklist> queryWrapper;
-
     @Autowired
     BlacklistService blacklistService;
 
@@ -39,8 +37,8 @@ public class BlacklistController {
 
     @PostMapping("/delete")
     public R deleteBlacklist(@RequestBody BlacklistQuery query) {
-        queryWrapper = new QueryWrapper<>();
-        setQueryWrapper(query);
+        QueryWrapper<Blacklist> queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(query,queryWrapper);
         boolean save = blacklistService.remove(queryWrapper);
         if (save) {
             return R.ok().message("取消关注");
@@ -50,15 +48,15 @@ public class BlacklistController {
     }
     @PostMapping("/condition")
     public R blacklistCondition(@RequestBody BlacklistQuery query) {
-        queryWrapper = new QueryWrapper<>();
-        setQueryWrapper(query);
+        QueryWrapper<Blacklist> queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(query,queryWrapper);
         List<Blacklist> blacklists = blacklistService.list(queryWrapper);
         return R.ok().data("list", blacklists).data("num", blacklists.size());
     }
     //
 //
 //
-    private void setQueryWrapper(BlacklistQuery query){
+    private void setQueryWrapper(BlacklistQuery query,QueryWrapper<Blacklist> queryWrapper){
         if (query.getUserId() != null) {
             queryWrapper.eq("user_id", query.getUserId());
         }

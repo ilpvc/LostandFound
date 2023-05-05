@@ -30,7 +30,7 @@ public class AttentionController {
         this.attentionService = attentionService;
     }
 
-    QueryWrapper<Attention> queryWrapper;
+
 
     @PostMapping("/addAttention")
     public R addAttention(@RequestBody Attention attention) {
@@ -47,8 +47,8 @@ public class AttentionController {
 
     @PostMapping("/delete")
     public R deleteAttention(@RequestBody AttentionQuery query) {
-        queryWrapper = new QueryWrapper<>();
-        setQueryWrapper(query);
+        QueryWrapper<Attention> queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(query,queryWrapper);
         boolean save = attentionService.remove(queryWrapper);
         if (save) {
             return R.ok().message("取消关注");
@@ -58,15 +58,15 @@ public class AttentionController {
     }
     @PostMapping("/condition")
     public R attentionCondition(@RequestBody AttentionQuery attentionQuery) {
-        queryWrapper = new QueryWrapper<>();
-        setQueryWrapper(attentionQuery);
+        QueryWrapper<Attention> queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(attentionQuery,queryWrapper);
         List<Attention> attentions = attentionService.list(queryWrapper);
         return R.ok().data("list", attentions).data("num", attentions.size());
     }
     //
 //
 //
-    private void setQueryWrapper(AttentionQuery attentionQuery){
+    private void setQueryWrapper(AttentionQuery attentionQuery,QueryWrapper<Attention> queryWrapper){
         if (attentionQuery.getAttentionUserId() != null) {
             queryWrapper.eq("attention_user_id", attentionQuery.getAttentionUserId());
         }

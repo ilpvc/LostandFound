@@ -27,7 +27,6 @@ public class ReportController {
     @Autowired
     ReportService reportService;
 
-    private QueryWrapper<Report> queryWrapper;
 
     @PostMapping("/addReport")
     public R addReport(@RequestBody Report report) {
@@ -62,8 +61,8 @@ public class ReportController {
 
     @PostMapping("/condition")
     public R getReportByCondition(@RequestBody ReportQuery reportQuery) {
-        queryWrapper = new QueryWrapper<>();
-        setQueryWrapper(reportQuery);
+        QueryWrapper<Report> queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(reportQuery,queryWrapper);
         List<Report> reports = reportService.list(queryWrapper);
         return R.ok().data("list", reports).data("num", reports.size());
     }
@@ -71,7 +70,7 @@ public class ReportController {
     //
 //
 //
-    private void setQueryWrapper(ReportQuery reportQuery) {
+    private void setQueryWrapper(ReportQuery reportQuery,QueryWrapper<Report> queryWrapper) {
         if (reportQuery.getUserId() != null) {
             queryWrapper.eq("user_id", reportQuery.getUserId());
         }

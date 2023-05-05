@@ -68,6 +68,9 @@ public class CollectionsController {
         if (query.getPostId() != null) {
             queryWrapper.eq("post_id", query.getPostId());
         }
+        if (query.getPostIds()!=null&&query.getPostIds().size()!=0){
+            queryWrapper.in("post_id", query.getPostIds());
+        }
 
     }
 }

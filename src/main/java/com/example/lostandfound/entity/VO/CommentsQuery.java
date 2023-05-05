@@ -1,8 +1,11 @@
 package com.example.lostandfound.entity.VO;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.example.lostandfound.entity.Post;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.util.ArrayList;
 
 /**
  * Description:
@@ -29,6 +32,8 @@ public class CommentsQuery {
     @ApiModelProperty("评论内容")
     @TableField("content")
     private String content;
+
+    private ArrayList<Integer> postIds;
 
     private Integer status;
 

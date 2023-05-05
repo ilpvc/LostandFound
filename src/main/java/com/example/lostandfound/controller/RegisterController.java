@@ -34,8 +34,6 @@ public class RegisterController {
     @Autowired
     UserService userService;
 
-    QueryWrapper<UserSecurity> userSecurityQueryWrapper;
-
     @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired
@@ -48,7 +46,7 @@ public class RegisterController {
     public R register(@RequestBody LoginParams loginParams) {
         User user = new User();
         UserSecurity userSecurity = new UserSecurity();
-        userSecurityQueryWrapper = new QueryWrapper<>();
+        QueryWrapper<UserSecurity> userSecurityQueryWrapper = new QueryWrapper<>();
         userSecurityQueryWrapper.eq("nickname",loginParams.getNickName())
                 .or().eq("email",loginParams.getEmail());
 
