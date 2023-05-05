@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -152,7 +153,7 @@ public class PostController {
                 flag = true;
             }
             if (postQuery.getSearchInfo() != null) {
-                queryWrapper.like("title", postQuery.getSearchInfo()).or().like("content", postQuery.getSearchInfo());
+                queryWrapper.and(qw->qw.like("title", postQuery.getSearchInfo()).or().like("content", postQuery.getSearchInfo()));
                 flag = true;
             }
             if (postQuery.getContent() != null) {
@@ -178,7 +179,12 @@ public class PostController {
                 queryWrapper.in("type", postQuery.getTypes());
                 flag = true;
             }
-            if (postQuery.getTags()!=null){
+            if ("其他".equals(postQuery.getTags())){
+                ArrayList<String> tags = new ArrayList<>(Arrays.asList("高数", "算法", "计算机", "四六级", "C语言"));
+                for (String s : tags){
+                    queryWrapper.notLike("tags",s);
+                }
+            } else if (postQuery.getTags()!=null){
                 queryWrapper.like("tags",postQuery.getTags());
             }
             if (!flag) {

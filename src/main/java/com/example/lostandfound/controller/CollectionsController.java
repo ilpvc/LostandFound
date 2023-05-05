@@ -29,8 +29,6 @@ public class CollectionsController {
     @Autowired
     CollectionsService collectionsService;
 
-    QueryWrapper<Collections> queryWrapper;
-
     @PostMapping("/addCollections")
     public R addCollection(@RequestBody Collections collections) {
         boolean save = collectionsService.save(collections);
@@ -57,13 +55,13 @@ public class CollectionsController {
 
     @PostMapping("/condition")
     public R getCollectionByCondition(@RequestBody CollectionQuery query) {
-        queryWrapper = new QueryWrapper<>();
-        setQueryWrapper(query);
+        QueryWrapper<Collections> queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(query,queryWrapper);
         List<Collections> collections = collectionsService.list(queryWrapper);
         return R.ok().data("list", collections).data("num", collections.size());
     }
 
-    private void setQueryWrapper(CollectionQuery query){
+    private void setQueryWrapper(CollectionQuery query,QueryWrapper<Collections> queryWrapper){
         if (query.getUserId() != null) {
             queryWrapper.eq("user_id", query.getUserId());
         }
