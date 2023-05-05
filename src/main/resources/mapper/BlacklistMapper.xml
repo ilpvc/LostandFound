@@ -7,6 +7,7 @@
         <id column="id" property="id" />
         <result column="user_id" property="userId" />
         <result column="other_user_id" property="otherUserId" />
+        <result column="status" property="status"/>
         <result column="created_time" property="createdTime" />
     </resultMap>
 

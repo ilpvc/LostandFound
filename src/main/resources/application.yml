@@ -13,7 +13,8 @@ mybatis-plus:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.137.111:3306/LAF?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowMultiQueries=true&allowPublicKeyRetrieval=true
+      #    url: jdbc:mysql://192.168.137.111:3306/LAF?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowMultiQueries=true&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://150.158.4.148:10093/LAF?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowMultiQueries=true&allowPublicKeyRetrieval=true
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
@@ -21,15 +22,15 @@ spring:
     #初始化连接池的连接数量 大小，最小，最大
     druid:
       initial-size: 20
-      min-idle: 5
-      max-active: 30
+      min-idle: 20
+      max-active: 40
       #配置获取连接等待超时的时间
       max-wait: 60000
       #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       time-between-eviction-runs-millis: 60000
       # 配置一个连接在池中最小生存的时间，单位是毫秒
       min-evictable-idle-time-millis: 30000
-      validation-query: SELECT 1
+      validation-query: SELECT 'x'
       test-while-idle: true
       test-on-borrow: true
       test-on-return: false
@@ -43,9 +44,9 @@ spring:
       #数据库索引
       database: 0
       #服务器地址
-      host: 192.168.137.111
+      host: 150.158.4.148
       #端口号
-      port: 6379
+      port: 10094
       #redis密码（默认为空）
       password: 123456
       #连接redis超时时间
@@ -74,5 +75,5 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /test
-  packages-to-scan: com.example.lostandfound.controller,com.example.lostandfound.entity.VO
+  packages-to-scan: com.example.lostandfound.controller,com.example.lostandfound.entity.VO,com.example.lostandfound.entity
 

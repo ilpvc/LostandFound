@@ -37,6 +37,9 @@ public class Follow implements Serializable {
     @TableField("following_id")
     private Integer followingId;
 
+    @TableField("status")
+    private Integer status;
+
     @ApiModelProperty("创建时间")
     @TableField(value = "created_time",fill = FieldFill.INSERT)
     private Date createdTime;

@@ -18,5 +18,7 @@ public class LikesQuery {
 
     private Integer postId;
 
+    private Integer status;
+
     private ArrayList<Integer> postIds;
 }

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Description:
@@ -35,4 +36,10 @@ public class Attention implements Serializable {
     @ApiModelProperty("被关注用户Id")
     @TableField("attentioned_user_id")
     private Integer attentionedUserId;
+
+    @TableField("status")
+    private Integer status;
+
+    @TableField("created_time")
+    private Date createdTime;
 }

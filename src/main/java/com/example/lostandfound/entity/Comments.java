@@ -46,11 +46,11 @@ public class Comments implements Serializable {
     private String content;
 
     @ApiModelProperty("创建时间")
-    @TableField(value = "created_time",fill = FieldFill.INSERT)
+    @TableField(value = "created_time", fill = FieldFill.INSERT)
     private Date createdTime;
 
     @ApiModelProperty("更新时间")
-    @TableField(value = "updated_time",fill = FieldFill.INSERT_UPDATE)
+    @TableField(value = "updated_time", fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
     @ApiModelProperty("删除时间，若为null则未删除")
@@ -64,6 +64,8 @@ public class Comments implements Serializable {
     @ApiModelProperty("父级评论id，若为null则为一级评论")
     @TableField("parent_id")
     private Integer parentId;
+    @TableField("status")
+    private Integer status;
 
 
 }

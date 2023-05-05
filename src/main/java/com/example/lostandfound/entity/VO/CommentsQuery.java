@@ -30,6 +30,7 @@ public class CommentsQuery {
     @TableField("content")
     private String content;
 
+    private Integer status;
 
     @ApiModelProperty("评论类型，1、一级评论 2、二级评论")
     @TableField("comment_type")

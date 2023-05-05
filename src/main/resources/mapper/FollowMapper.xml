@@ -7,6 +7,7 @@
         <id column="id" property="id" />
         <result column="follower_id" property="followerId" />
         <result column="following_id" property="followingId" />
+        <result column="status" property="status"/>
         <result column="created_time" property="createdTime" />
         <result column="updated_time" property="updatedTime" />
     </resultMap>

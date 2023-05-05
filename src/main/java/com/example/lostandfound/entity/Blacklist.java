@@ -25,6 +25,9 @@ public class Blacklist implements Serializable {
     @TableField("user_id")
     private Integer userId;
 
+    @TableField("status")
+    private Integer status;
+
     @TableField("other_user_id")
     private Integer otherUserId;
 

@@ -7,6 +7,8 @@
         <id column="id" property="id" />
         <result column="user_id" property="userId" />
         <result column="post_id" property="postId" />
+        <result column="status" property="status"/>
+        <result column="created_time" property="createdTime"/>
     </resultMap>
 
 </mapper>

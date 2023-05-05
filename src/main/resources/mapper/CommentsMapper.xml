@@ -14,6 +14,7 @@
         <result column="deleted_time" property="deletedTime" />
         <result column="comment_type" property="commentType" />
         <result column="parent_id" property="parentId" />
+        <result column="status" property="status"/>
     </resultMap>
 
 </mapper>

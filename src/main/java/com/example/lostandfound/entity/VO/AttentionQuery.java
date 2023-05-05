@@ -1,5 +1,8 @@
 package com.example.lostandfound.entity.VO;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  * Description:
@@ -13,4 +16,7 @@ public class AttentionQuery {
     private Integer attentionUserId;
 
     private Integer attentionedUserId;
+
+    private Integer status;
+
 }

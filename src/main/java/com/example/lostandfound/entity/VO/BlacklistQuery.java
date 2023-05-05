@@ -9,4 +9,6 @@ public class BlacklistQuery {
     private Integer userId;
 
     private Integer otherUserId;
+
+    private Integer status;
 }

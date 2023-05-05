@@ -14,4 +14,6 @@ public class CollectionQuery {
     private Integer userId;
 
     private Integer postId;
+
+    private Integer status;
 }

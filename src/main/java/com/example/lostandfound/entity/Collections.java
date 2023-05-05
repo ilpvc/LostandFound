@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Description:
@@ -36,4 +37,9 @@ public class Collections implements Serializable {
     @TableField("post_id")
     private Integer postId;
 
+    @TableField("status")
+    private Integer status;
+
+    @TableField("created_time")
+    private Date createdTime;
 }

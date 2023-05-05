@@ -36,6 +36,9 @@ public class Likes implements Serializable {
     @TableField("post_id")
     private Integer postId;
 
+    @TableField("status")
+    private Integer status;
+
     @ApiModelProperty("创建时间")
     @TableField(value = "created_time",fill = FieldFill.INSERT)
     private Date createdTime;
