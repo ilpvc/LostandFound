@@ -45,6 +45,16 @@ public class AttentionController {
         }
     }
 
+    @PutMapping("/updateAttention")
+    public R updateAttention(@RequestBody Attention attention) {
+        boolean save = attentionService.updateById(attention);
+        if (save) {
+            return R.ok().message("更新成功");
+        } else {
+            return R.error().message("更新失败");
+        }
+    }
+
     @PostMapping("/delete")
     public R deleteAttention(@RequestBody AttentionQuery query) {
         QueryWrapper<Attention> queryWrapper = new QueryWrapper<>();
@@ -72,6 +82,9 @@ public class AttentionController {
         }
         if (attentionQuery.getAttentionedUserId() != null) {
             queryWrapper.eq("attentioned_user_id", attentionQuery.getAttentionedUserId());
+        }
+        if (attentionQuery.getStatus()!=null){
+            queryWrapper.eq("status",attentionQuery.getStatus());
         }
 
     }

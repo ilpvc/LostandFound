@@ -100,13 +100,7 @@ public class LikesController {
     public R getCollectionByCondition(@RequestBody LikesQuery query) {
         QueryWrapper<Likes> localQueryWrapper = new QueryWrapper<>();
         setQueryWrapper(query,localQueryWrapper);
-        List<Likes> likes = new ArrayList<>();
-        if (query.getPostIds() != null && query.getPostIds().size() != 0) {
-            likes = likesService.listByIds(query.getPostIds());
-        } else {
-            likes = likesService.list(localQueryWrapper);
-        }
-
+        List<Likes> likes = likesService.list(localQueryWrapper);
         return R.ok().data("list", likes).data("num", likes.size());
     }
 
@@ -118,7 +112,12 @@ public class LikesController {
         if (query.getPostId() != null) {
             queryWrapper.eq("post_id", query.getPostId());
         }
-
+        if (query.getStatus()!=null){
+            queryWrapper.eq("status",query.getStatus());
+        }
+        if (query.getPostIds() != null && query.getPostIds().size() != 0) {
+            queryWrapper.in("post_id",query.getPostIds());
+        }
 
     }
 

@@ -39,6 +39,16 @@ public class CollectionsController {
         }
     }
 
+    @PutMapping("/updateCollections")
+    public R updateCollection(@RequestBody Collections collections) {
+        boolean save = collectionsService.updateById(collections);
+        if (save) {
+            return R.ok();
+        } else {
+            return R.error();
+        }
+    }
+
     @PostMapping("/delete")
     public R deleteCollections(@RequestBody CollectionQuery query) {
         boolean flag = collectionsService.remove(
@@ -71,6 +81,8 @@ public class CollectionsController {
         if (query.getPostIds()!=null&&query.getPostIds().size()!=0){
             queryWrapper.in("post_id", query.getPostIds());
         }
-
+        if (query.getStatus()!=null){
+            queryWrapper.eq("status",query.getStatus());
+        }
     }
 }

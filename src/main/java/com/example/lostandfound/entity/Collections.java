@@ -1,5 +1,6 @@
 package com.example.lostandfound.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -40,6 +41,6 @@ public class Collections implements Serializable {
     @TableField("status")
     private Integer status;
 
-    @TableField("created_time")
+    @TableField(value = "created_time",fill = FieldFill.INSERT)
     private Date createdTime;
 }

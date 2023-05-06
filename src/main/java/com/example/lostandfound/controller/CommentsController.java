@@ -129,6 +129,9 @@ public class CommentsController {
         if (commentsQuery.getParentId() != null) {
             queryWrapper.eq("parent_id", commentsQuery.getParentId());
         }
+        if (commentsQuery.getStatus()!=null){
+            queryWrapper.eq("status",commentsQuery.getStatus());
+        }
     }
 
 }

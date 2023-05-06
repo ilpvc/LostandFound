@@ -35,6 +35,16 @@ public class BlacklistController {
         }
     }
 
+    @PutMapping("/updateBlacklist")
+    public R updateBlacklist(@RequestBody Blacklist blacklist) {
+        boolean save = blacklistService.updateById(blacklist);
+        if (save) {
+            return R.ok().message("更新成功");
+        } else {
+            return R.error().message("更新失败");
+        }
+    }
+
     @PostMapping("/delete")
     public R deleteBlacklist(@RequestBody BlacklistQuery query) {
         QueryWrapper<Blacklist> queryWrapper = new QueryWrapper<>();
@@ -62,6 +72,9 @@ public class BlacklistController {
         }
         if (query.getOtherUserId() != null) {
             queryWrapper.eq("other_user_id", query.getOtherUserId());
+        }
+        if (query.getStatus()!=null){
+            queryWrapper.eq("status",query.getStatus());
         }
 
     }
