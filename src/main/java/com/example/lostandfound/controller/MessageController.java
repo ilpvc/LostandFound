@@ -5,12 +5,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.lostandfound.entity.Likes;
 import com.example.lostandfound.entity.Message;
 import com.example.lostandfound.entity.VO.LikesQuery;
+import com.example.lostandfound.entity.VO.MessageQuery;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.service.MessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Description:
@@ -86,6 +89,27 @@ public class MessageController {
     public R deleteMessageById(@PathVariable int id){
         messageService.removeById(id);
         return R.ok();
+    }
+
+    @PostMapping("/condition")
+    public R getMessageByCondition(@RequestBody MessageQuery query) {
+        QueryWrapper<Message> queryWrapper = new QueryWrapper<>();
+        setQueryWrapper(query,queryWrapper);
+        List<Message> messages = messageService.list(queryWrapper);
+        return R.ok().data("list", messages).data("num", messages.size());
+    }
+
+    private void setQueryWrapper(MessageQuery query,QueryWrapper<Message> queryWrapper) {
+        if (query.getUserId() != null) {
+            queryWrapper.eq("user_id", query.getUserId());
+        }
+        if (query.getType() != null) {
+            queryWrapper.eq("type", query.getType());
+        }
+        if (query.getContent()!=null){
+            queryWrapper.like("content",query.getContent());
+        }
+
     }
 
 }
