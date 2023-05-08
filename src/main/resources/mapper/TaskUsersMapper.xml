@@ -4,11 +4,12 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.example.lostandfound.entity.TaskUsers">
-        <id column="task_user_id" property="taskUserId" />
+        <id column="id" property="id" />
         <result column="task_id" property="taskId" />
         <result column="user_id" property="userId" />
-        <result column="create_time" property="createdTime" />
-        <result column="update_time" property="updatedTime" />
+        <result column="status" property="status" />
+        <result column="created_time" property="createdTime" />
+        <result column="updated_time" property="updatedTime" />
     </resultMap>
 
 </mapper>

@@ -27,8 +27,8 @@ public class Tasks implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "task_id", type = IdType.AUTO)
-    private Integer taskId;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     @TableField("task_name")
     private String taskName;

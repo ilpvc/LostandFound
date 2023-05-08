@@ -27,8 +27,8 @@ public class TaskUsers implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "task_user_id", type = IdType.AUTO)
-    private Integer taskUserId;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     @ApiModelProperty("任务ID")
     @TableField("task_id")
@@ -37,6 +37,10 @@ public class TaskUsers implements Serializable {
     @ApiModelProperty("用户ID")
     @TableField("user_id")
     private Integer userId;
+
+    @ApiModelProperty("领取状态")
+    @TableField("status")
+    private Integer status;
 
     @ApiModelProperty("创建时间")
     @TableField(value = "created_time",fill = FieldFill.INSERT)

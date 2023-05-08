@@ -4,7 +4,7 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.example.lostandfound.entity.Tasks">
-        <id column="task_id" property="taskId" />
+        <id column="id" property="id" />
         <result column="task_name" property="taskName" />
         <result column="points" property="points" />
         <result column="description" property="description" />
