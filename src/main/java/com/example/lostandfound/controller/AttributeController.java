@@ -68,6 +68,11 @@ public class AttributeController {
         return R.ok().data("list", attributes);
     }
 
+    @PostMapping("/update")
+    public R updateAttrByKey(@RequestBody Attribute attribute){
+        attributeService.updateById(attribute);
+        return R.ok();
+    }
 
     private void setQueryWrapper(AttributeQuery attributeQuery){
         if (attributeQuery.getAttrKey() != null) {
