@@ -3,10 +3,10 @@ package com.example.lostandfound.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.lostandfound.entity.Post;
+import com.example.lostandfound.entity.*;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.entity.VO.PostQuery;
-import com.example.lostandfound.service.PostService;
+import com.example.lostandfound.service.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +33,17 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    CommentsService commentsService;
+
+    @Autowired
+    CollectionsService collectionsService;
+
+    @Autowired
+    LikesService likesService;
+
+    @Autowired
+    ReportService reportService;
 
     @GetMapping("/")
     public R getAllPost() {
@@ -77,6 +88,10 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     public R deletePost(@PathVariable int id) {
+        //删除此帖的所有评论
+        QueryWrapper<Comments> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("post_id",id);
+        commentsService.remove(queryWrapper);
 
         boolean flag = postService.removeById(id);
         if (flag) {
@@ -191,5 +206,31 @@ public class PostController {
                 queryWrapper.eq("id", 0);
             }
         }
+    }
+
+    public void deletePostByUserId(int id){
+
+
+        QueryWrapper<Post> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id",id);
+
+        List<Post> posts = postService.list(queryWrapper);
+        for (Post post:posts){
+            QueryWrapper<Comments> queryWrapper1 = new QueryWrapper<>();
+            queryWrapper.eq("post_id",post.getId());
+            commentsService.remove(queryWrapper1);
+            QueryWrapper<Collections> collectionsQueryWrapper = new QueryWrapper<>();
+            collectionsQueryWrapper.eq("post_id",post.getId());
+            collectionsService.remove(collectionsQueryWrapper);
+
+            QueryWrapper<Likes> likesQueryWrapper = new QueryWrapper<>();
+            likesQueryWrapper.eq("post_id",post.getId());
+            likesService.remove(likesQueryWrapper);
+
+            QueryWrapper<Report> reportQueryWrapper = new QueryWrapper<>();
+            reportQueryWrapper.eq("post_id",post.getId());
+            reportService.remove(reportQueryWrapper);
+        }
+        postService.remove(queryWrapper);
     }
 }

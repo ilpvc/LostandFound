@@ -3,12 +3,14 @@ package com.example.lostandfound.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.lostandfound.entity.User;
 import com.example.lostandfound.entity.UserSecurity;
+import com.example.lostandfound.entity.UserSettings;
 import com.example.lostandfound.entity.VO.LoginParams;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.entity.VO.UserQuery;
 import com.example.lostandfound.service.LikesService;
 import com.example.lostandfound.service.UserSecurityService;
 import com.example.lostandfound.service.UserService;
+import com.example.lostandfound.service.UserSettingsService;
 import com.example.lostandfound.utils.RedisCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,8 @@ public class RegisterController {
     UserSecurityService userSecurityService;
 
     @Autowired
+    UserSettingsService userSettingsService;
+    @Autowired
     RedisCache redisCache;
 
     @PostMapping("/")
@@ -68,6 +72,12 @@ public class RegisterController {
             User one = userService.getOne(queryWrapper);
             userSecurity.setUserId(one.getId());
             userSecurityService.save(userSecurity);
+
+            //为用户新建设置表
+            UserSettings userSettings = new UserSettings();
+            userSettings.setUserId(user.getId());
+            userSettingsService.save(userSettings);
+
             return R.ok().message("注册成功");
         }else if (userSecurities.size()!=0){
             return R.error().message("此用户名或邮箱已经被注册");
