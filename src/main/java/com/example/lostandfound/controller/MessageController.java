@@ -107,11 +107,6 @@ public class MessageController {
 //        }
 //    }
 
-    @DeleteMapping("/delete")
-    public R deleteMessageById(@PathVariable int id){
-        messageService.removeById(id);
-        return R.ok();
-    }
 
     @PostMapping("/condition")
     public R getMessageByCondition(@RequestBody MessageQuery query) {
