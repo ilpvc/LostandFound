@@ -2,8 +2,10 @@ package com.example.lostandfound.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.lostandfound.entity.Comments;
 import com.example.lostandfound.entity.Likes;
 import com.example.lostandfound.entity.Message;
+import com.example.lostandfound.entity.VO.CommentsQuery;
 import com.example.lostandfound.entity.VO.LikesQuery;
 import com.example.lostandfound.entity.VO.MessageQuery;
 import com.example.lostandfound.entity.VO.R;
@@ -69,6 +71,26 @@ public class MessageController {
         } else {
             return R.error();
         }
+    }
+
+    @DeleteMapping("/{id}")
+    public R deleteMessage(@PathVariable int id){
+        messageService.removeById(id);
+        return R.ok();
+    }
+
+
+    @PostMapping("/pageMessageCondition/{pageNo}/{pageCount}")
+    public R pageMessageCondition(@PathVariable int pageNo,
+                                   @PathVariable int pageCount,
+                                   @RequestBody MessageQuery messageQuery) {
+        Page<Message> page = new Page<>(pageNo, pageCount);
+        QueryWrapper<Message> queryWrapper = new QueryWrapper<>();
+
+        setQueryWrapper(messageQuery,queryWrapper);
+
+        messageService.page(page, queryWrapper);
+        return R.ok().data("items", page);
     }
 
 //    @PostMapping("/delete")

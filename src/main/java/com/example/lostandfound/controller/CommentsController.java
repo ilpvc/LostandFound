@@ -84,18 +84,18 @@ public class CommentsController {
 
 
 //
-//    @PostMapping("/pageCommentsCondition/{pageNo}/{pageCount}")
-//    public R pageCommentsCondition(@PathVariable int pageNo,
-//                               @PathVariable int pageCount,
-//                               @RequestBody CommentsQuery commentsQuery) {
-//        Page<Comments> page = new Page<>(pageNo, pageCount);
-//        queryWrapper = new QueryWrapper<>();
-//
-//        setQueryWrapper(commentsQuery);
-//
-//        commentsService.page(page, queryWrapper);
-//        return R.ok().data("items", page);
-//    }
+    @PostMapping("/pageCommentsCondition/{pageNo}/{pageCount}")
+    public R pageCommentsCondition(@PathVariable int pageNo,
+                               @PathVariable int pageCount,
+                               @RequestBody CommentsQuery commentsQuery) {
+        Page<Comments> page = new Page<>(pageNo, pageCount);
+        QueryWrapper<Comments> queryWrapper = new QueryWrapper<>();
+
+        setQueryWrapper(commentsQuery,queryWrapper);
+
+        commentsService.page(page, queryWrapper);
+        return R.ok().data("items", page);
+    }
 
     @PostMapping("/condition")
     public R CommentsCondition(@RequestBody CommentsQuery commentsQuery) {
