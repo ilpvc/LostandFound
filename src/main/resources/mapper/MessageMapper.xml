@@ -8,7 +8,10 @@
         <result column="user_id" property="userId"/>
         <result column="type" property="type"/>
         <result column="content" property="content"/>
+        <result column="status" property="status"/>
+        <result column="result" property="result"/>
         <result column="created_time" property="createdTime" />
+        <result column="updated_time" property="updatedTime" />
     </resultMap>
 
 </mapper>

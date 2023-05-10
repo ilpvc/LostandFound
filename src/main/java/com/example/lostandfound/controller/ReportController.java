@@ -1,8 +1,11 @@
 package com.example.lostandfound.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.lostandfound.entity.Message;
 import com.example.lostandfound.entity.Post;
 import com.example.lostandfound.entity.Report;
+import com.example.lostandfound.entity.VO.MessageQuery;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.entity.VO.ReportQuery;
 import com.example.lostandfound.service.ReportService;
@@ -62,15 +65,25 @@ public class ReportController {
     @PostMapping("/condition")
     public R getReportByCondition(@RequestBody ReportQuery reportQuery) {
         QueryWrapper<Report> queryWrapper = new QueryWrapper<>();
-        setQueryWrapper(reportQuery,queryWrapper);
+        setQueryWrapper(reportQuery, queryWrapper);
         List<Report> reports = reportService.list(queryWrapper);
         return R.ok().data("list", reports).data("num", reports.size());
     }
 
-    //
-//
-//
-    private void setQueryWrapper(ReportQuery reportQuery,QueryWrapper<Report> queryWrapper) {
+    @PostMapping("/pageReportCondition/{pageNo}/{pageCount}")
+    public R pageReportCondition(@PathVariable int pageNo,
+                                  @PathVariable int pageCount,
+                                  @RequestBody ReportQuery reportQuery) {
+        Page<Report> page = new Page<>(pageNo, pageCount);
+        QueryWrapper<Report> queryWrapper = new QueryWrapper<>();
+
+        setQueryWrapper(reportQuery, queryWrapper);
+
+        reportService.page(page, queryWrapper);
+        return R.ok().data("items", page);
+    }
+
+    private void setQueryWrapper(ReportQuery reportQuery, QueryWrapper<Report> queryWrapper) {
         if (reportQuery.getUserId() != null) {
             queryWrapper.eq("user_id", reportQuery.getUserId());
         }
@@ -78,10 +91,10 @@ public class ReportController {
             queryWrapper.eq("post_id", reportQuery.getPostId());
         }
         if (reportQuery.getContent() != null) {
-            queryWrapper.like("content",reportQuery.getContent());
+            queryWrapper.like("content", reportQuery.getContent());
         }
-        if (reportQuery.getStatus() != null){
-            queryWrapper.eq("status",reportQuery.getStatus());
+        if (reportQuery.getStatus() != null) {
+            queryWrapper.eq("status", reportQuery.getStatus());
         }
 
     }

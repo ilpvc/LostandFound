@@ -126,6 +126,12 @@ public class MessageController {
         if (query.getContent()!=null){
             queryWrapper.like("content",query.getContent());
         }
+        if (query.getStatus()!=null){
+            queryWrapper.eq("status",query.getStatus());
+        }
+        if (query.getResult()!=null){
+            queryWrapper.like("result",query.getResult());
+        }
 
     }
 

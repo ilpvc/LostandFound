@@ -18,4 +18,8 @@ public class MessageQuery {
 
     private String content;
 
+    private String result;
+
+    private Integer status;
+
 }

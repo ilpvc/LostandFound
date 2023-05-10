@@ -35,8 +35,18 @@ public class Message implements Serializable {
     @TableField("content")
     private String content;
 
+    @TableField("result")
+    private String result;
+
+    @TableField("status")
+    private Integer status;
+
     @ApiModelProperty("创建时间")
     @TableField(value = "created_time",fill = FieldFill.INSERT)
     private Date createdTime;
+
+    @ApiModelProperty("完成时间")
+    @TableField(value = "updated_time",fill = FieldFill.UPDATE)
+    private Date updatedTime;
 
 }
