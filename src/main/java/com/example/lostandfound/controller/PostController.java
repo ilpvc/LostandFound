@@ -181,6 +181,7 @@ public class PostController {
             }
             if (postQuery.getStatus() != null && postQuery.getStatus().size() != 0) {
                 queryWrapper.in("status", postQuery.getStatus());
+                flag = true;
             }
             if (postQuery.getCollection() != null && postQuery.getCollection().size() != 0) {
                 queryWrapper.in("id", postQuery.getCollection());
