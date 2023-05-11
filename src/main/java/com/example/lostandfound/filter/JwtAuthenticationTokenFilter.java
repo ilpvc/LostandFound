@@ -43,7 +43,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 request.getRequestURI().contains("/static/") ||
                 request.getRequestURI().contains("/lostandfound/attribute/") ||
                 request.getRequestURI().contains("/swagger-ui/") ||
-                request.getRequestURI().contains("/api-docs")
+                request.getRequestURI().contains("/api-docs") ||
+                request.getRequestURI().contains("/register/email")
 
         ) {
             filterChain.doFilter(request, response);

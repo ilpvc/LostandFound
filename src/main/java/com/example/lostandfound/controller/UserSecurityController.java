@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 /**
  * Description:
  *
@@ -93,4 +95,16 @@ public class UserSecurityController {
         }
     }
 
+
+    @PostMapping("/reset")
+    public R resetPassword(@RequestBody UserSecurity userSecurity){
+        UserSecurity security = userSecurityService.getOne(new QueryWrapper<UserSecurity>()
+                .eq("email", userSecurity.getEmail()));
+        if (Objects.isNull(security)){
+            return R.error();
+        }
+        security.setPassword("{bcrypt}"+passwordEncoder.encode(userSecurity.getPassword()));
+        userSecurityService.updateById(security);
+        return R.ok();
+    }
 }

@@ -12,4 +12,6 @@ import lombok.Data;
 public class Mail {
 
     private String userEmail;
+
+    private String code;
 }

@@ -5,6 +5,7 @@ import com.example.lostandfound.entity.User;
 import com.example.lostandfound.entity.UserSecurity;
 import com.example.lostandfound.entity.UserSettings;
 import com.example.lostandfound.entity.VO.LoginParams;
+import com.example.lostandfound.entity.VO.Mail;
 import com.example.lostandfound.entity.VO.R;
 import com.example.lostandfound.entity.VO.UserQuery;
 import com.example.lostandfound.service.LikesService;
@@ -84,5 +85,19 @@ public class RegisterController {
         }
         return R.error().message("注册失败");
 
+    }
+
+    /**
+     * 邮箱验证
+     */
+    @PostMapping("/email")
+    public R verificationMailbox(@RequestBody Mail mail){
+        String code = redisCache.getCacheObject("email-code-" + mail.getUserEmail());
+        log.info(mail.toString());
+        if (!Objects.equals(code, mail.getCode())){
+            return R.error().message("验证码错误或邮箱不存在");
+        }else {
+            return R.ok();
+        }
     }
 }
