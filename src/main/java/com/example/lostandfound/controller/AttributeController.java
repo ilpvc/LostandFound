@@ -24,7 +24,6 @@ import java.util.List;
 @CrossOrigin
 public class AttributeController {
 
-    QueryWrapper<Attribute> queryWrapper;
     @Autowired
     AttributeService attributeService;
     @GetMapping("/")
@@ -35,7 +34,7 @@ public class AttributeController {
     @GetMapping("/only/{key}")
     public R getQuestionByOnlyKey(@PathVariable String key) {
 
-        queryWrapper = new QueryWrapper<>();
+        QueryWrapper<Attribute> queryWrapper = new QueryWrapper<>();
 
         if (!"".equals(key)){
             queryWrapper.eq("attr_key",key);
@@ -47,7 +46,7 @@ public class AttributeController {
     @GetMapping("/{key}")
     public R getQuestionByKey(@PathVariable String key) {
 
-        queryWrapper = new QueryWrapper<>();
+        QueryWrapper<Attribute> queryWrapper = new QueryWrapper<>();
 
         if (!"".equals(key)){
             queryWrapper.eq("attr_key",key);
@@ -59,7 +58,7 @@ public class AttributeController {
     @GetMapping("/like/{key}")
     public R getQuestionLikeKey(@PathVariable String key) {
 
-        queryWrapper = new QueryWrapper<>();
+        QueryWrapper<Attribute> queryWrapper = new QueryWrapper<>();
 
         if (!"".equals(key)){
             queryWrapper.like("attr_key",key);
@@ -74,10 +73,28 @@ public class AttributeController {
         return R.ok();
     }
 
-    private void setQueryWrapper(AttributeQuery attributeQuery){
+    private void setQueryWrapper(AttributeQuery attributeQuery,QueryWrapper<Attribute> queryWrapper){
         if (attributeQuery.getAttrKey() != null) {
             queryWrapper.eq("attr_key", attributeQuery.getAttrKey());
         }
 
+    }
+
+
+    @PostMapping("/delete")
+    public R deleteAttrByCondition(@RequestBody AttributeQuery query){
+        QueryWrapper<Attribute> queryWrapper = new QueryWrapper<>();
+        if (query.getAttrKey()!=null){
+            queryWrapper.eq("attr_key",query.getAttrKey());
+        }
+        attributeService.remove(queryWrapper);
+        return R.ok();
+    }
+
+
+    @PostMapping("/add")
+    public R addAttribute(@RequestBody Attribute attribute){
+        attributeService.save(attribute);
+        return R.ok();
     }
 }
